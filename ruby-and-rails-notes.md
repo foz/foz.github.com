@@ -1,4 +1,12 @@
+---
+title: Ruby and Rails Notes
+---
+
+Ruby and Rails Notes
+====================
+
 Create fixtures from an existing database
+-----------------------------------------
 
 	http://nubyonrails.topfunky.com/articles/2005/12/27/dump-or-slurp-yaml-reference-data
 
@@ -11,6 +19,7 @@ Create fixtures from an existing database
 	./script/runner "Modelname.to_fixture"
 
 Mac Droppings
+-------------
 
 	If you are working off a mounted network volume in a subversion project, 
 	OSX will create ._* and .DS_Store files all over the place. These then get 
@@ -21,6 +30,7 @@ Mac Droppings
 	global-ignores = ._* .DS_Store
 
 Updating RubyGems:
+------------------
 
 	$ sudo gem update --system
 
@@ -32,6 +42,7 @@ Updating RubyGems:
 		you know the trick to preserve previous gems, which i can't remember)
 
 Manually building a gem:
+------------------------
 
 	Say, for instance, you want to link the mysql gem against a certain
 	version of the mysql libraries:
@@ -49,10 +60,12 @@ Manually building a gem:
 	(you will need to sudo or be root for the install)
 
 Adding GitHub to RubyGems:
+--------------------------
 
     $ gem sources -a http://gems.github.com
 
 Mysql gem under OSX:
+--------------------
 
   Install:
 	$ sudo gem install mysql -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
@@ -75,6 +88,7 @@ Mysql gem under OSX:
   => 50134
   
 Rest and Nested Routing
+-----------------------
 
 	map.resources :categories do |categories|
 	  categories.resources :products
@@ -89,6 +103,7 @@ Rest and Nested Routing
 	/categories/5/products/6
 
 How to turn an Array or Object into a Hash:
+-------------------------------------------
 
 	a = [1,2,3,4]
 	Hash[*a]
@@ -109,6 +124,7 @@ How to turn an Array or Object into a Hash:
 	=> {:year => 2007, :month => 7, :day => 4}
 	
 Using splat
+-----------
 
 	# For parameters in a method definition:
 
@@ -121,6 +137,7 @@ Using splat
 	a, *b = "1,2,3,4".split(/,/)  # a == [1], b == [2,3,4]		
 
 Hash initialization
+-------------------
 
 	# default to static values, instead of nil
 
@@ -132,12 +149,12 @@ Hash initialization
 	h["hashes"]  # value is "hashes rock"
 
 Profile your tests
+------------------
 
 	rake log:clear; PROFILE=1 rake; ./script/profile_logs
 
-Annotate Models
-
 Favorite Plugins
+----------------
 
     * gibberish
     * query_trace
@@ -147,12 +164,13 @@ Favorite Plugins
     * attachment_fu - If file uploads give you a severe headache, attachment_fu is like Advil.
     * betternestedset - Gives you higher performance selection methods like all_children. The API takes some getting used to and isn't suitable to replace existing solutions in all cases.
     * debug_view_helper - Adds a button to your page that pops up debugging info about the request, cookies, session and instance variables.
-    * exception_notification - Sends a ticket to my support queue whenever a user experiences an error.
-    * geokit - Andre Lewis and Bill Eisenhauer have done some amazing stuff here. Adds geo-intelligence (street address and IP geocoding) to ActiveRecords; also adds query-by-proximity, though I don't use that piece.
+    * geokit
     * paginating_find - Another one that should be embedded into core ActiveRecord to replace the existing pagination that everyone recommends never to use.
 
 
 Script/Console Tricks
+---------------------
+
   # mess w/ routes
   >> include ActionController::UrlWriter
   >> default_url_options[:host]="example.com"
@@ -160,6 +178,7 @@ Script/Console Tricks
   => 'http://example.com/comments/photo/345/john'
 
 Using google analytics from ajax
+--------------------------------
 
 	/* js */
 	function trackPageHit(path){
@@ -170,10 +189,12 @@ Using google analytics from ajax
 	page.call 'trackPageHit', item_path(@item) # or any relative url
 
 To install a specific version of a gem:
+---------------------------------------
 
 	$ sudo gem install rails -v 1.2.6
 
 To generate a rails app using a specific installed gem version:
+---------------------------------------------------------------
 
 	$ rails _1.2.6_ myapp
 
@@ -187,6 +208,7 @@ Note that this works with all gem binaries:
 
 
 Finding Code
+------------
 	
     # open all your global helpers in all projects
 	$ find . -name application_helper.rb | xargs mate
@@ -211,6 +233,8 @@ Regex Shortcut
 
 
 Fix Readline, forward-delete and ~ (tilde) problem on OSX Snow Leopard:
+-----------------------------------------------------------------------
+
 	# via http://snippets.aktagon.com/snippets/387-How-to-fix-irb-in-OSX-Snow-Leopard
 	
 	$ sudo port install readline +universal
@@ -222,8 +246,9 @@ Fix Readline, forward-delete and ~ (tilde) problem on OSX Snow Leopard:
 	$ sudo make install
 	
 Rmagick
+-------
 
-	Version 2.13 is most stable, in my testing. It requires ImageMagick 6.
+Version 2.13 is most stable, in my testing. It requires ImageMagick 6.
 	
 Install rmagick on OSX (IM install can take 20m or more on a reasonably fast mac)
 	$ sudo port install ImageMagick @6.6.1-5_0+q16

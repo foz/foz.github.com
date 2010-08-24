@@ -1,3 +1,7 @@
+---
+title: MySQL Notes
+---
+
 == Creating a new user/database ==
 
 	mysql> create database dbname

@@ -13,9 +13,6 @@ mlc classic:
 
 
 
-orff: damn I hate it when ppl send e-cards to my real email address
-foz: ecards suck ass
-foz: send me a friggin email, pleeeease
 
 
 "I prefer to make the structure of my programs self-illuminating, eliminating the need for comments. I am not always successful, so while my programs are awaiting perfection, I am writing comments." -  Douglas Crockford, JavaScript: The Good Parts, 1st Edition

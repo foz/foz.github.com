@@ -1,3 +1,7 @@
+---
+title: Stupid Shell Trucks
+---
+
 Stupid Shell Tricks
 ===================
 
