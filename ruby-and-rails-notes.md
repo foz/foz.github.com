@@ -1,33 +1,12 @@
 ---
 title: Ruby and Rails Notes
+layout: default
+
 ---
 
 Ruby and Rails Notes
 ====================
 
-Create fixtures from an existing database
------------------------------------------
-
-	http://nubyonrails.topfunky.com/articles/2005/12/27/dump-or-slurp-yaml-reference-data
-
-    install:
-	
-	./script/plugin install http://topfunky.net/svn/plugins/ar_fixtures
-
-	Run:
-
-	./script/runner "Modelname.to_fixture"
-
-Mac Droppings
--------------
-
-	If you are working off a mounted network volume in a subversion project, 
-	OSX will create ._* and .DS_Store files all over the place. These then get 
-	flagged as new by subversion, unless you do something like this:
-	Add the following line to your ~/.subversion/config in the [miscellany] section:
-
-	[miscellany]
-	global-ignores = ._* .DS_Store
 
 Updating RubyGems:
 ------------------
@@ -37,6 +16,7 @@ Updating RubyGems:
     (or, on Debian)
 
     $ sudo gem install rubygems-update
+
     $ sudo update_rubygems
       ( will probably have to reinstall gems after this step, unless
 		you know the trick to preserve previous gems, which i can't remember)
@@ -67,7 +47,8 @@ Adding GitHub to RubyGems:
 Mysql gem under OSX:
 --------------------
 
-  Install:
+Install:
+
 	$ sudo gem install mysql -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
 
 	Or, 64-bit:
@@ -76,16 +57,20 @@ Mysql gem under OSX:
 	Or, with MacPorts, mysql5 and mysql5-devel installed, this might work (or try 64-bit)
 	$ sudo gem install -V mysql -- --with-mysql-config=/opt/local/bin/mysql_config5
 
-  testing it:
+testing it:
+
 	$ irb
-  irb(main):001:0> require 'rubygems'
-  => false
-  irb(main):002:0> require 'mysql_api'
-  => true
-  irb(main):003:0> Mysql.get_client_info 
-  => "5.1.34"
-  irb(main):004:0> Mysql.get_client_version
-  => 50134
+	irb(main):001:0> require 'rubygems'
+	=> false
+
+	irb(main):002:0> require 'mysql_api'
+	=> true
+
+	irb(main):003:0> Mysql.get_client_info 
+	=> "5.1.34"
+
+	irb(main):004:0> Mysql.get_client_version
+	=> 50134
   
 Rest and Nested Routing
 -----------------------
@@ -158,24 +143,22 @@ Favorite Plugins
 
     * gibberish
     * query_trace
-
-    * acts_as_slugable - Easy way to create permalinks from a title, without numeric IDs.
-    * acts_as_state_machine - This is probably my favorite plugin. So good, I think it should be a part of ActiveRecord itself. If you have objects in "draft," "published" or "active" states you might want to check this out.
-    * attachment_fu - If file uploads give you a severe headache, attachment_fu is like Advil.
-    * betternestedset - Gives you higher performance selection methods like all_children. The API takes some getting used to and isn't suitable to replace existing solutions in all cases.
-    * debug_view_helper - Adds a button to your page that pops up debugging info about the request, cookies, session and instance variables.
+    * acts_as_slugable 
+    * acts_as_state_machine
+    * attachment_fu 
+    * betternestedset 
+    * debug_view_helper
     * geokit
-    * paginating_find - Another one that should be embedded into core ActiveRecord to replace the existing pagination that everyone recommends never to use.
-
+    * paginating_find
 
 Script/Console Tricks
 ---------------------
 
-  # mess w/ routes
-  >> include ActionController::UrlWriter
-  >> default_url_options[:host]="example.com"
-  >> comments_url("john","photo", 345)
-  => 'http://example.com/comments/photo/345/john'
+	# mess w/ routes
+	>> include ActionController::UrlWriter
+	>> default_url_options[:host]="example.com"
+	>> comments_url("john","photo", 345)
+	=> 'http://example.com/comments/photo/345/john'
 
 Using google analytics from ajax
 --------------------------------
@@ -250,11 +233,13 @@ Rmagick
 
 Version 2.13 is most stable, in my testing. It requires ImageMagick 6.
 	
-Install rmagick on OSX (IM install can take 20m or more on a reasonably fast mac)
+Install rmagick on OSX (be patient, the install can take 20m or more on a reasonably fast mac)
+
 	$ sudo port install ImageMagick @6.6.1-5_0+q16
 	$ sudo gem install rmagick -v 2.13.1
 	
-Install rmagick on debian 
+Install rmagick on debian:
+
 	$ sudo aptitude install libmagick++9-dev
 	$ sudo gem install rmagick -v 2.13.1
 	

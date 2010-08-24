@@ -1,3 +1,10 @@
+---
+layout: default
+title: VIM Notes
+
+---
+
+
 Buffer commands:
 
 	bn => buffer next

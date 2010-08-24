@@ -1,23 +1,31 @@
+---
+title: Debian Notes
+layout: default
+
+---
+
+# Debian notes 
+> _(many apply to Ubuntu and other distributions as well)_
+
+
+
+
 ### Package Management
 
-	# update
+I like to use [Aptitude](http://wiki.debian.org/Aptitude) which handles dependencies and helps me from doing really stupid things.
 
-	$ apt-get update
 	$ aptitude update
+	$ aptitude safe-upgrade
+	$ aptitude dist-upgrade
 
-	# upgrade
-
-	$ apt-get -u upgrade
-	# even better...
-	$ aptitude upgrade
-
-	# list installed packages
+list installed packages
 
 	$ apt-show-versions
 		# or...
 	$ dpkg -l
 
-	# To make sure we see important bugs and such, install
+To make sure we see important bugs and such, install (can also be annoying tho)
+
 	$ aptitude install apt-listbugs
 
 ### Networking
@@ -47,17 +55,18 @@
 
 	[ http://lists.debian.org/debian-amd64/2005/10/msg00043.html ]
 
-# When booting from CF, a loop occurs that hangs the system
+### When booting from Compact Flash card, a loop can occur that hangs the system
 
 	This bug is still not solved. Adding the following "magic" line in
 	persistant.rules solves the problem for me:
+	
 	BUS=="ide", SYSFS{block/removable}=="1", DRIVER!="ide-cdrom", \
 	  GOTO="no_volume_id"
 
 	debian/unstable, i386, udev 0.087-1, linux-image-2.6.15-1-686 2.6.15-8
 
 
-# Apache-related commands
+### Apache2-related commands
 
 	a2ensite
 		Will create the correct symlinks in sites-enabled to allow the 
@@ -73,7 +82,7 @@
 		Will remove the symlinks from mods-enabled so that the module 
 		cannot be used
 
-# Samba hacks
+### Samba hacks
 	
 	Old versions of Samba (2.x) would encode file names using Code Page 850. 
 	The new Samba releases (3.x) now correctly use utf-8. 
@@ -87,17 +96,17 @@
 	# actually do it
 	$ convmv -r -f cp850 -t utf8 --notest --nfc .
 	
-# useful packages to install 
+### useful packages to install 
 
 	modconf: manages kernel module installation and selections
 	m-a: manages building and installing of third-party patches and modules
 	dnsmasq: combined dns abd dhcp server, uses /etc/hosts and has simple configuration
 
-# Boot Time
+### Boot Time
 
 	update-grub: will write your changes to the /boot partition and process menu.lst macros
 
-# Debian packages one may want to have around
+### Debian packages one may want to have around
 
 
 	# dev tools
@@ -141,8 +150,8 @@
 	mysql-client-5.0 
 	
 	
-# how to mount a usb disk automatically when using udev
-#    
+### how to mount a usb disk automatically when using udev
+
 	From http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev-FAQ ...
 
 	Q: Can I use udev to automount a USB device when I connect it?
@@ -174,66 +183,68 @@
 
 	$ mount /media/new250
 
-# Set the label of an MSDOS (vfat) drive and so other stuff:
+### Set the label of an MSDOS (vfat) drive and so other stuff:
+
     (as root)
 	$ aptitude install mtools
 	(edit /etc/mtools.conf)
 	mlabel x:newname
 	
 
-# To see what partitions the system knows about, do :
+### To see what partitions the system knows about, do :
 
 	$ cat /proc/partitions
 
 	$ fdisk -l
 
-# To update the initial ramdisk (for kernel 2.6) :
+### To update the initial ramdisk (for kernel 2.6) :
 
 	$ update-initramfs -u -t -k `uname -r`
 
-# Promise controller has problems with Kernel 2.6.x and DMA, solution was to lower DMA:
+### Promise controller has problems with Kernel 2.6.x and DMA, solution was to lower DMA:
 
 	$ hdparm -X udma1 /dev/hdX
 
-#  To prevent fsck from being run on a disk:
+### To prevent fsck from being run on a disk:
 
 	$ tune2fs -c 0 -i 0 /dev/sda1
 
-# Check your BIOS rev from linux
+### Check your BIOS rev from linux
 	
 	$ sudo dmidecode -s bios-version
 
-# Diversions
+### Diversions
 
 	$ sudo aptitude install pacman4console cmatrix figlet
 
-# add missing keyrings
+### add missing keyrings
 
     $ apt-get install debian-keyring debian-archive-keyring
     $ apt-key update
     
-# Run apache2 using worker module (instead of the default, prefork):
+### Run apache2 using worker module (instead of the default, prefork):
 
 	$ sudo aptitude install apache2-mpm-worker
 
-# Non-interactive logins not using bashrc and PATH?
+### Non-interactive logins not using bashrc and PATH?
 
-  the default ~/.bashrc file usually starts with something like this:
-  # If not running interactively, don't do anything
-  [ -z "$PS1" ] && return
-  ... comment out this line :)
+	the default ~/.bashrc file usually starts with something like this:
+	# If not running interactively, don't do anything
+	[ -z "$PS1" ] && return
+	... comment out this line :)
 
-  In /etc/ssh/sshd_config, you may need to add:
-  PermitUserEnvironment yes
+	In /etc/ssh/sshd_config, you may need to add:
+	PermitUserEnvironment yes
 
-# User Google public DNS with DHCP 
+### Use Google public DNS with DHCP 
 
 	# via http://code.google.com/speed/public-dns/docs/using.html
 	sudo vi /etc/dhcp3/dhclient.conf
 	prepend domain-name-servers 8.8.8.8, 8.8.4.4;
 
 
-# boot up in better screen res (good for virtualbox)
+### boot up in better screen res (good for virtualbox)
+
 	edit /boot/grub/menu.lst
 	add "vga=314" to default_options= line
 	$ update-grub

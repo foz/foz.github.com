@@ -1,0 +1,25 @@
+body{
+	font-family: "gesta-1","gesta-2",sans-serif;
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+#content{
+	padding: 1em;
+}
+#top{
+	background-color: #ccc;
+	padding: 20px;
+}
+#footer{
+	background-color: #ccc;
+	padding: 20px;
+	font-size: 12px;
+}
+pre{
+	background-color: #eee;
+	padding: 10px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}

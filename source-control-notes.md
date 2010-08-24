@@ -1,3 +1,9 @@
+---
+title: Source Control Notes
+layout: default
+
+---
+
 To safely see what updates would be:
 
 	$ cvs -n up

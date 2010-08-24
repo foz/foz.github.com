@@ -1,37 +1,44 @@
 ---
 title: MySQL Notes
+layout: default
+
 ---
 
-== Creating a new user/database ==
+General
+-------
+
+Creating a new user/database
 
 	mysql> create database dbname
 
 	mysql> grant all on dbname.* to user@localhost identified by 'password';
 
-	# this next line might be required for compatibility between mysql 4.1 and older apps
+this next line might be required for compatibility between mysql 4.1 and older apps
 
 	mysql> set password for user@localhost = OLD_PASSWORD('password');
 
-== Adding an index ==
+Adding an index
 
 	alter table stats_popularity add index(cat,object_id);
 
-== Set root password for first time after mysql-server install:
+Set root password for first time after mysql-server install:
+
 
 	$ mysqladmin -p -u root password 'newpassword'
 	(hit enter on the password prompt)
 	
-== See table info
+See table info
 	
 	$ show create table shows\G
 
-== Pipe through pager
+Pipe through pager
 
 	$ \P less
 	
-== Mysql Tuning ==
+Mysql Tuning
+------------
 
-    = Table Types =
+Table Types
 
     InnoDB: 
         pros: default table type for rails. row level locks, transactions, more reliable.
@@ -43,7 +50,7 @@ title: MySQL Notes
     
     Conclusion - use MyISAM for logs, cache, or temp tables. InnoDB for everything else.
     
-    = my.cnf tunings =
+my.cnf tunings
     
     innodb_buffer_pool_size: go big
     innodb_flush_method=O_DIRECT # testing this, said to help
@@ -57,14 +64,13 @@ title: MySQL Notes
 	long_query_time = 2
     
     
-    Note: when you change innodb table settings, the tables might get messed up on the next restart. So, backup!
+Note: when you change innodb table settings, the tables might get messed up on the next restart. So, backup!
     
-== set up mysql defaults for user account ==    
+mysql defaults for user account
+-------------------------------
 
-   = edit ~/.my/cnf:
- 
-   [client]
-   user=foz
-   password=xxxx
-   [mysql]
-   database=my_favororite_db   
+	edit ~/.my.cnf:
+
+	[client]
+	user=foz
+	password=xxxx

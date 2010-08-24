@@ -1,5 +1,7 @@
 ---
 title: MacOSX Stuff
+layout: default
+
 ---
 
 Mac OSX stuff

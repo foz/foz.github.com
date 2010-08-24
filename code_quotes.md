@@ -1,5 +1,7 @@
 ---
-Title: Code Quotes
+title: Code Quotes
+layout: default
+
 ---
 
 Funny
