@@ -1,0 +1,24 @@
+
+Apache Notes
+------------
+
+
+Secure Certificate Generation using OpenSSL
+
+1. Make a private key:
+	$ openssl genrsa -des3 -out domainname.key 1024
+
+   Or, Make a private key with no password (or encryption)	to start the webserver automatically
+	$ openssl genrsa -out domainname.key 1024
+	    	
+2. Generate certificate request
+    $ openssl req -new -key domainname.key -out domainname.csr
+
+3. To verify the reqest you just created:
+	$ openssl req -verify -noout -text -in domainname.csr
+
+4. To verify the key file (and test password):
+	$ openssl rsa -noout -text -in keyname.key
+
+5. To change (or remove) a .key password:
+	$ openssl rsa -in keyname.key -out keyname.nopw.key

@@ -1,0 +1,12 @@
+Notes for NY.SOMEBOX.COM
+Gentoo Linux
+
+*** Apache ***
+
+To change the flags passed to apache on startup (like -D PHP),
+/etc/conf.d/apache
+
+To install PERL modules with cpan, and have them be gentoo-world friendly:
+
+g-cpan Module::Name
+

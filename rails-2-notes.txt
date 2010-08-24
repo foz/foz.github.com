@@ -1,0 +1,234 @@
+Rails 2 (Bryan Helmkamp):
+
+ AR STUFF:
+
+numerical_validations:
+:validates_numericality_of: :salary, :greater_than => 49_000
+:allow_blank=>true
+
+XML in JSON out:
+from_xml 
+to_json ( can have includes, etc)
+
+Sexy Migrations (chris and PJ):
+old format still works
+t.belongs_to :blog, :null-> false  ( same as blog_id )
+also polymorphic=>true 
+schema.rb will dump out sexy to see the conversion
+
+Query Cache:
+simple cache -- whole thing is cleared on ANY update or delete to any table. comes for free with R 2.0.
+check on this for development mode vs production 
+
+for skipping:
+def self.uncached_newest
+uncached do
+  find(:all, :order=> :created_at)
+ end
+end
+
+Foxy Fixtures:
+associated records are created for you
+reference associations by name 
+sets created_at and updated_at to now
+
+#blogs.yml
+my_blog:
+  name: "my awesome blog"
+
+#posts.yml
+first_post:
+  blog: my_blog
+  title: "first post!"
+
+## load all fixtures all the time 
+fixtures :all
+
+Action Pack Stuff:
+
+Cookie sessions:
+now the default session store (clear text, hashed)
+must set a secret in environment.rb
+
+config.action_controller.session = {
+  :session_key=> '_rails_app_session',
+  :secret=>'fdsafsdfs243fdsaf324'
+
+script/generate rails  -- regenerate rails specific stuff
+
+HTTP-only cookies
+attempt to prevent cross-site scripting attacks 
+
+CSRF Protection
+Cross site request forgery protection
+
+uses a token to verify requests are from this app
+
+built into form_tag, etc.
+
+in application.rb (protect from forgery)
+
+Action view:
+Partial Layouts:
+
+<% render :partial => "post", :layout => "window" %>
+
+or with a block: 
+
+<% render :layout => "window", :locals => { :name -> "Recent" } do %>
+ <% for post in @recent_posts %>
+<h2><%= post.title %> </h2>
+<!-- ... --> 
+<% end %>
+
+<% end %>
+
+Route Namespaces: 
+(like a with_SOMEVAR) shortcut
+
+
+(goes to admin::posts)
+
+map.namespace :admin do |admin|
+  admin.resources :posts
+end
+
+(goes to posts)
+map.resources :post
+
+REST colons are gone / slashes used now
+
+Association routing shortcuts (better syntax)
+map.resources :blogs, :has_many => [:posts, :themes],
+  :has_one =>:owner 
+
+HTTP Auth:
+
+class PostsController < ApplicationContoller
+  USER_NAME, PASSWORD = 'mike', 'secret'
+
+  before_filter :authenticate, :except=> [:index ]
+
+private
+ def authenticate 
+   authenticate_or_request_with_http_basic do |user_name,password|
+.....
+
+Exception handlers:
+rescue_from User::NotAuthorized, :with=> :deny_access
+
+def deny_access
+  # ...
+end
+
+Asset Caching:
+(may or may not include the size caching thing ?=24324 )
+
+<%= stylesheet_link_tag "reset", "main", :cache=>true %>
+
+(concatenates reset and main stylesheets) 
+
+<%= javascript_include_tag "wiz", "bang", :cache=>"special" %>
+
+(concatenates wiz and bang js files)
+
+Asset Servers:
+distributes requests to four asset hosts 
+speeds up load times
+
+inproduction.rb:
+ActionController::Base.asset_host = "asset%d.example.com"
+( asset1.example.com, asset2.example.com etc )
+
+firebug performance plugin y!slow ??
+
+UE yahoo site
+
+Atom Feed Helper:
+
+atom_feed do |feed|
+  feed.title("fdsafs")
+  for post in @posts
+  end 
+end
+
+Multiview:
+(filename.format.renderer)
+EX:
+show.csv.erb
+edit.html.haml
+index.atom.builder
+
+rake tasks to covert everything with svn mv
+
+useful for respond to iphone etc:
+
+simply_helpful:
+dom_class(@person) => "person"
+dom_class(@person, :edit) => "edit_person"
+
+dom_id(@person) => "person_1234"
+
+<% div_for @person dp %> 
+<% end %>
+
+becomes:
+<div class="person" id="person_42">
+</div>
+
+content_tag_for   etc.
+
+url_for(@post)
+url_for(@post.new)
+
+link_to, redirect_to, etc. 
+
+render :partial=>@post  (arrays get conveted to a collection)
+
+<% form_for @person do |f| %>
+<% f.text_field :name %>
+<% end %>
+
+works for new and edit !!!
+
+
+
+
+
+Debugger:
+sudo gem install -y ruby-debug
+call method debugger in your code
+
+commands:
+irb
+list
+p / pp
+help
+
+Hash Filtering:
+
+Database Rake Tasks:
+rake:db:create (create DBs from databse.yml)
+rake:db:rollback  (go back 1 version)
+rake:db:reset
+
+
+List Routes in Rake:
+$rake routes
+
+$rake notes
+( find TODOs FIXMEs, etc )
+
+Request profiler:
+gem install ruby-prof 
+
+acts_as stuff moved to plugins
+
+find_all  gone
+find_first  gone
+
+
+
+
+
+

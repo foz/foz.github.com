@@ -1,0 +1,5 @@
+# The windows 'hosts' file:
+$WINDOWS_DIR\system32\drivers\etc
+
+# clear dns
+ipconfig /flushdns

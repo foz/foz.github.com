@@ -1,0 +1,486 @@
+                                  Linux Notes
+
+   Gentoo
+   SSL Certificates
+   PHP
+   SSL
+
+Gentoo Linux Notes
+
+  Gentoo: Keeping up to date
+
+   To find a package:
+
+ # emerge search ....
+
+   This keeps you up to date with portage (the package list)
+
+ # emerge sync
+
+   This will keep you up to date:
+
+ # emerge -uDav world
+
+   This will rebuild any dependencies:
+
+ # revdep-rebuild
+
+   To fix /etc files:
+
+ # etc-update
+
+   To add services so they start automatically
+
+ # rc-update add (servicename) default
+
+   You should also do this:
+
+ # emerge gentoolkit
+
+   so you can do this:
+
+ # etcat -v whatever // shows versions available, w/ status
+ # etcat -u whatever // shows USE flags for package, w/ descriptions
+ # etcat -c whatever // shows changelog for package whatever
+
+   Here is a pretty good guide for emerge, worth skimming the whole thread so
+   you can see what can happen (bad and good):
+
+ http://forums.gentoo.org/viewtopic.php?p=1060314#1060314
+
+   This is my favorite, and I forgot to tell you about it (lots of good
+   info):
+
+ http://gentoo-wiki.com
+
+   The thing about ALSA: remember that if you make any changes to the kernel
+   you will need to unmerge and re-emerge all the alsa packages.
+
+   These guides are pretty good :
+
+ http://www.gentoo.org/doc/en/alsa-guide.xml
+ http://opensrc.org/alsa/index.php
+
+  Gentoo: Building the Kernel (2.4)
+
+ [1] cp /usr/src/linux/.config /usr/src/linux-2.x.xx-yyyyyy/.config
+ [2] cd /usr/src
+ [3] rm linux
+ [4] ln -s linux-2.4.xx-yyyyyy linux
+ [5] cd /usr/src/linux
+ [6] make oldconfig
+ [7] make menuconfig or make xconfig
+ [8] make dep clean bzImage modules modules_install
+ [9] mount /boot (where /boot is an entry in your /etc/fstab, which should [normally not be mounted during normal use)
+ [10] mv /boot/bzImage /boot/bzImage.old
+ [11] cp /usr/src/linux/arch/i386/boot/bzImage /boot/bzImage
+ [12] edit /boot/grub/menu.lst and add an entry for your new kernel and replace the reference to bzImage in your previous kernel entry to point to the deprecated kernel file (bzImage.old)
+ [13] if you are using nvidia- emerge nivdia-kernel
+ [14] if you are using alsa - emerge alsa-driver
+ [15] edit /etc/modules.autoload to reflect any changes in modules to be auto loaded
+ [16] unmount /boot (ie. umount /boot)
+ [17] shutdown -hr now
+
+ ... and voila you new kernel entry should appear in the grub menu waiting to be tried....
+
+  Gentoo: Kernel build - see the output, while capturing to a file:
+
+         OPTIONS="dep clean bzImage modules modules_install" \
+         make $OPTIONS 2>&1 | tee /var/log/kernel-make.log
+
+  Gentoo: Case Study - Builiding the DemocracyNow! file server
+
+   Harware: An old (but fast) Dell Precision Workstation 420, with two 800MHz
+   P-III processors and 256MB of RDRAM. Three 18GB SCSI disks and a SCSI
+   CDROM for the disks.
+
+   Drive Config: For this machine, I decided to try out software RAID. Since
+   this was my first attempt at RAID, I started Googling for some
+   information. I came across these, which were helpful:
+
+     * How to do a Gentoo Install on Software RAID
+
+     * SATA RAID1 Step by Step
+
+   I decided to configure the drives with three partitions each. Each disk
+   would contain an identical /boot parition, marked as bootable, in Ext3
+   format, for extra safety. This means that any future kernel upgrades will
+   require that the new image be copied to all three partitions. If one drive
+   failed, the machine would try to boot from the next SCSI disk in the BIOS
+   boot ordering. Each disk also would contain a /swap partition of 256MB.
+   Since Linux can handle multiple swap partitions on multiple disks, this
+   would provide 786MB of swap space (or 512MB if one of the disks failed).
+   The rest of each disk's third partition would be software RAID5,
+   approximately 16g per disk. The total usable space for the single root
+   partition would be 32g (since one disk would be used for parity).
+
+   Install: Just starting the machine did not not turn out to be easy. The
+   SCSI CD would boot the Gentoo 2004.2 LiveCD I burned, but once it started
+   up, it would fail to find the SCSI CDROM and drop out to to the BusyBox
+   ash shell, and complain that it couldn't connect to a tty so no job
+   control would happen. Googling this error revealed that I needed to pass
+   some command-line switches to the CD boot, and then manually mount the
+   CDROM. This worked:
+
+ boot: gentoo-nofb nodetect
+ [boots, then stops...]
+
+ # modprobe aic7xxx
+ # exec /linuxrc
+ [boots the rest of the way...]
+
+   Things seemed to work after that. Once booted, I could see that there were
+   three SCSI disks, /dev/sda, /dev/sdb, and /dev/sdc. I partitioned each of
+   them the same way:
+
+ sda1: 32m /boot
+ sda2: 256mb swap (type 83)
+ sda3: (the rest) type 'fd' for Linux RAID autodetect
+
+   Next, I created /etc/raidtab with the following configuration for RAID 5:
+
+ raiddev /dev/md0
+ raid-level 5
+ nr-raid-disks 3
+ persistent-superblock 1
+ chunk-size 32
+ parity-algorithm right-symmetric
+ device /dev/sda3
+ raid-disk 0
+ device /dev/sdb3
+ raid-disk 1
+ device /dev/sdc3
+ raid-disk 2
+
+   Next, I used mkraid to build the array:
+
+ # mkraid /dev/md0
+ # raidstart /dev/md0
+
+   It took a long time to finish building the raid. I could see how things
+   were going by checking /proc/mdstat for RAID status. Heat turned out to be
+   a problem, so I had to mount an extra fan on the case in front of the SCSI
+   drives. One the raid was built, it was time to format the partitions on
+   all the drives:
+
+ # mke2fs -j /dev/sda1
+ # mke2fs -j /dev/sdb1
+ # mke2fs -j /dev/sdc1
+ # mkswap /dev/sda2
+ # mkswap /dev/sdb2
+ # mkswap /dev/sdc2
+ # mkreiserfs /dev/md0
+
+   I tested the speed of partitions using hdparm:
+
+ # hdparm -tT /dev/md0
+ # hdparm -rT /dev/sda
+ # hdparm -rT /dev/sdb
+ # hdparm -rT /dev/sdc
+
+   The results showed that two of the SCSI disks averaged 19MB/sec, while the
+   fastest drive hit 26MB/sec. The RAID volume reported about 38MB/sec, which
+   was better than I expected.
+
+   Next, I activated the swap partitions:
+
+ # swapon /dev/sda2
+ # swapon /dev/sdb2
+ # swapon /dev/sdc2
+
+   I checked that they were working by running 'free -m', which reported that
+   753MB of swap space was available. Good. Now it was time to install the
+   rest of Gentoo.
+
+ # mount /dev/md0 /mnt/gentoo
+ # mkdir /mnt/gentoo/boot
+ # mount /dev/sda1 /mnt/gentoo/boot
+ # modprobe 3c59x
+ # net-setup eth0
+ # ifconfig -a
+ # ping google.com
+
+   Ok, partitions are ready, networking is ready, time to expand the base
+   gentoo system from the LiveCD:
+
+ # tar -xvjpf /mnt/cdrom/stage/stage3/stage3-i686-2004.2.tar.bz2
+
+   I had to then edit /mnt/gentoo/etc/make.conf for this system:
+
+ # nano -w /etc/make.conf
+
+ CFLAGS="-o3 -pipe -march=pentium3 -fomit-frame-pointer"
+ CHOST="i686-pc-linux=gnu"
+ ...
+ MAKEOPTS="-j3"   # dual processor machine
+ GENTOO_MIRRORS="http://gentoo.mirrors.pair.com"    # a local mirror known to be fast
+ USE="-gtk -X -gnome -alsa -kde -qt -dvd -cdr samba mysql ..."   # just a file server
+
+   The final steps at this point are to chroot into the new environment, and
+   emerge the portage tree:
+
+ # cp -L /etc/resolv.conf /mnt/gentoo/etc/resolv.conf
+ # cp /etc/raidtab /mnt/gentoo/etc
+ # mount -t proc none /mnt/gentoo/proc
+ # chroot /mnt/gentoo /bin/bash
+ # env-update
+  * Caching service dependencies...
+ # source /etc/profile
+ # emerge --sync
+ # mkdir /etc/portage
+ # echo "sys-libs/glibc userlocales" >> /etc/portage/package.use
+ # echo "en_US/ISO-8859-1" > /etc/locales.build
+ # echo "en_US.UTF-8/UTF-8" >> /etc/locales.build
+ # ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+ # emerge gentoo-dev-sources
+
+   Next we build the kernel. The processor type was set to Pentium3, and
+   support for SMP and two processors. Drivers for the 3c59x ethernet,
+   aic7xxx SCSI card (new driver), and raid were selected. Firewire was
+   turned on since we may add a card and external drives at some point soon.
+   Filesystem support for ext3 and reiserfs were also selected. Most of the
+   other default options for the 2.6.9 kernel were enabled. A lot of unneeded
+   support was disabled, such as USB, APIC, power management, sound, and
+   video. This is a server, after all. Finally, the kernel config is saved
+   and we start the compile:
+
+ # make && make install_modules
+
+   After about 20 minutes (only one processor is being used at this phase),
+   the kernel is built. It's time to emerge some needed packages and set up
+   the boot partition:
+
+ # emerge syslog-ng
+ # rm /etc/init.d/sysklogd
+ # rc-update add syslog-ng default
+ # emerge fcron
+ # rc-update add dcron default
+ # rc-update add net.eth0 default
+ # emerge mdadm
+ # emerge raidtools
+ # emerge reiserfsprogs
+ # emerge gentoolkit
+ # emerge grub
+
+   Now we make the grub.conf file:
+
+ # nano -w /boot/grub.conf
+
+ default 0
+ timeout 10
+ title=Gentoo Linux 2.6.9-r1
+ root (hd0,0)
+ kernel /kernel-2.6.9-gentoo-r1 root=/dev/md0
+
+ # mkdir /boot2
+ # mount /dev/sdb1 /boot2
+ # mkdir /boot3
+ # mount /dev/sdc1 /boot3
+ # cp -a /boot/* /boot2
+ # cp -a /boot/* /boot3
+
+   Edit /boot2/grub/grub.conf and /boot3/grub/grub.conf so the line root
+   (hdx,0) is correct for that disk
+
+ # grub --no-floppy
+
+ grub > root (hd0,0)
+ grub > setup (hd0)
+ grub > root (hd1,0)
+ grub > setup (hd1)
+ grub > root (hd2,0)
+ grub > setup (hd2)
+ grub > quit
+
+ # exit
+ # cd /
+ # umount /mnt/gentoo/boot
+ # umount /mnt/gentoo/proc
+ # umount /mnt/gentoo
+ # raidstop
+ # reboot
+
+   Remove the cd, and see if it reboors. Once the system is back up, log in,
+   then emerge -vD world to get the rest of the system. All other standard
+   installation of software and environment config can take place from here
+   forward.
+
+  Gentoo: adding bluetooth support for Nokia 3650
+
+   I have a 3650 phone, and I want to transfer all of my contacts and info to
+   a new phone. I also wanted to learn how to use bluetooth with linux. Using
+   the 2.4.x kernel and a USB Bluetooth adapter from EPXO (model BT-DG02), I
+   ran accross this howto:
+
+ http://www.saunalahti.fi/~laakkon1/linux/3650_blue.php
+
+   The first thing I needed to do was enable bluetooth support in the kernel.
+   Since I didn't want to reinstall my kernel, I decided to build everything
+   as modules.
+
+   # cd /usr/src/linuc
+   # make menuconfig
+
+    1. On the 2.4 kernel menu, select "Bluetooth Support"
+
+    2. Enable "Bluetooth subsystem support" (which will make the next options
+       appear), "L2CAP" protocol support", "SCO links support", "RFCOMM
+       protocol support" (and "RFCOMM TTY support" below it) -- all as
+       modules <M>.
+
+    3. Then, under "Bluetooth device drivers -->", enable "HCI USB driver". I
+       also enabled "SCO (voice) support" below that. If you are using a
+       different bluetooth device on your linux box, you may need a different
+       driver. I found some great information here:
+       http://www.holtmann.org/linux/bluetooth/devices.html
+
+   Once the above changes are made, save the kernel config, and just rebuild
+   the modules you selected (no need to make the whole kernel again):
+
+   # make modules modules_install
+
+   Once the modules have finished compiling and are installed, they can be
+   loaded:
+
+   # insmod bluez
+   # insmod hci_usb
+   # insmod l2cap
+   # insmod rfcomm
+   # insmod sco
+
+   Now all the drivers should be loaded, and should show up with 'lsmod'.
+
+   Next, I emerged the required software:
+
+   # emerge -vD bluez-utils
+   # emerge -vD bluez-pan
+   # emerge -vD openobex
+
+Apache
+
+  Limiting Processes in httpd.conf
+
+   # this will
+
+   RLimitCPU 50
+   RLimitMem 15000000
+   RLimitNPROC 50
+
+PHP
+
+  PHP Gallery post-install (gentoo package www-apps/gallery)
+
+   For new installations:
+
+ $ touch /var/www/localhost/htdocs/gallery/.htaccess /var/www/localhost/htdocs/gallery/config.php
+
+   and then:
+
+ $ chown apache:apache /var/www/localhost/htdocs/gallery/.htaccess
+ $ chown apache:apache /var/www/localhost/htdocs/gallery/config.php
+
+   Then point your browser to
+
+         http://yourhost/gallery/setup/
+
+   and follow the instructions.
+
+  PHPmyadmin post-install (gentoo package dev-db/phpmyadmin)
+
+ # webapp-config -I -h ny.somebox.com -d phpmyadmin phpmyadmin 2.6.0_p2
+
+MySQL
+
+  MySQL: Suggested /etc/my.cnf settings
+
+ timezone = America/New_York    # sets the localy mysql server time zone (should match system time)
+ query-cache-type = 1           # turn on query cache
+ query-cache-size = 2M          # adjust size as needed (note: per server instance?)
+
+Security
+
+  Security: Ownership and Permissions with ezmlm
+
+   by John Beppu (beppu@somebox.com)
+
+   There are two users on the system who need to be able to read and write
+   files in the mailing list's directories -- alias and apache. alias is a
+   special user used by qmail. everything in /var/qmail/alias is its domain.
+   However, apache also needs to be able to read and write
+
+   into some of these directories, because there are web based tools that
+   will want to manipulate some of the data there. To accomodate this,
+
+   the following changes need to be made:
+
+     * change the ownership of all files and directories to
+         user:  alias
+         group: apache
+
+         cd /var/qmail/alias
+         chown -R alias.apache consec-newsletter/
+
+     * change the permission of all directories
+
+         user:   rwx
+         group:  rws
+         public: ---
+
+         cd /var/mail/alias
+         chmod 2770 consec-newsletter consec-newsletter/**/*(/)
+
+         ( that last line only works in zsh )
+
+     * change the permission of all files
+
+         user:   rw-
+         group:  rw-
+         public: ---
+
+         cd /var/qmail/alias
+         chmod 660 consec-newsletter/**/*(.)
+
+         ( that last line only works in zsh )
+
+   Finally, there's one last ownership/permission issue to be aware of.
+   Sometimes, files named "Log" or "lock" may be created in these
+
+   directories as a result of actions performed by ezmlm, such as
+   subscription and unsubscription. Unfortunately, these files are often not
+   created w/ the ideal ownership and permissons described previously.
+
+   Until a better solution is found, these files will have to have their
+   ownerships and permissions changed after they are created. Fortunately,
+   once they're created, they tend to stay there, so this won't have to be
+   done very often.
+
+  Security: gnupg
+
+   To fix the permissions of the .gnupg home dir:
+
+ # chmod 700 .gnupg
+ # chown -R user:user .gnupg
+ # chmod 600 .gnupg/*
+
+  Security: Secure Certificate Generation using OpenSSL
+
+   To make a key (GoDaddy):
+   openssl genrsa -des3 -out <name of your certificate>.key 1024
+
+   Example for use with instantssl (and others):
+   openssl req -new -nodes -keyout site.com-yr.key -out site.com-yr-04.csr
+
+ Example for use with Starfield (GoDaddy):
+ openssl req -new -key <name of your certificate>.key -out <name of your certificate>.csr
+
+   to verify the reqest you just created:
+
+ openssl req -verify -noout -text -in site.com-yr.csr
+
+   to verify the key file (and test password)
+
+ openssl rsa -noout -text -in keyname.key
+
+   to change (or remove) a .key password:
+
+ openssl rsa -in keyname.key -out keyname.nopw.key

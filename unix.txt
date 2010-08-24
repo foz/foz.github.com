@@ -1,0 +1,252 @@
+This is a Quick Reference to Unix Commands
+
+Archiving:
+
+ cpio          Makes backups, including the UNIX special files
+ format        Formats floppy disks
+ pack, pcat    Compress files
+ unpack        Uncompresses files
+ compress, uncompress,  Compresses/uncompresses
+ zcat                   files
+ dd            Allows you to write to devices without using structure
+ diskcp        Copies the contents of a floppy disk
+ dtype         Report the contents of media written on a floppy disk
+ pcpio         Portable cpio
+ ptar          Portable tar
+ tar           Makes backups (tape archive)
+
+Comparing:
+
+ diff       Compares two files and reports what must done to one to make
+            it look like the other
+ dircmp     Compares two directories, reporting the files unique to each
+            directory. If the same name is used dircmp reports if the files
+            have the same contents or not
+ bdiff      Allows you to run a diff process on files too large for diff comand
+ cmp        Does a byte-by-byte comparison of two files
+ comm       Finds the lines that are common between two sorted files. Three
+            columns are generated: the lines found only in the first file,
+            those only found in the second file, and the lines found in both files
+ diff3      Similar to diff but used for three files at a time
+ diskcmp    Compares two floppy disks using cmp (see diskcp)
+ sdiff      Runs diff with the results shown side by side
+
+DOS:
+
+ doscat     Reads a DOS diskette and runs cat on a file on that disk
+ doscp      Copies files back and forth between DOS diskd and UNIX
+ dosdir     Mimics the DOS DIR command on the DOS disk
+ dosformat  Formats a disk for DOS
+ dosls      Performs the UNIX ls command on the DOS disk
+ dosrm      Performs the UNIX rm command on the DOS disk
+ dosmkdir   Makes a directory on the DOS disk
+ dosrmdir   Removes a directory from the DOS disk
+ dtox       Strips the carriage return character and the end-of-file marker
+            (^Z) from files
+ xtod       Adds the carriage return character when a new line is encountered
+
+Editing:
+
+ ed         A line editor
+ vi         A full-screen editor that uses ed commands
+
+File Information:
+
+ l          Gives a detailed (long) directory listing
+ lc         Produces a columnar directory listing
+ ls         Lists the files found in the file system
+ wc         Counts the bytes, words, and lines in a file
+
+File Manipulation:
+
+ copy       Copies files and directory structures
+ chmod      Allows you to change the permissions of a file
+ rm         Removes files (deletes them)
+ umask      Allows you to set default permissions for filr creation
+ chown      Allows you to change the owner of the file
+ cd         Allows you to change the working directory
+ cp         Copies files
+ chgrp      Allows you to change the group owner of the file
+ ln         Allows you to create links (or aliases) for files
+ mkdir      Makes a directory
+ mv         Rename a file (moves it)
+ rmdir      Removes a directory
+ touch      Allows you to change the access and modification times of a file,
+            or to create a new specific times
+
+File Processing:
+
+ cat        Concatenates files
+ cut        Extracts fields from a list of files
+ join       Extracts the common lines from two sorted files
+ nl         Adds line numbers to files
+ paste      Produces columnar output from one or more files, where each file
+            contributes o colomn of the output; paste is often used with cut
+            to reorder columns in a file
+ pr         Processed files and writes them to the standard output after
+            applying formatting
+ sort       Sorts text files based on user definable keys
+ split      Divides a file into defined chunks
+ tr         Translates/maps the input of a file from one set of matched
+            characters to a new set
+ uniq       Strips repeated lines from a sorted file based on a specified key
+            value
+
+File Viewing:
+
+ cat         Display the contents of a file on-screen
+ head        Shows the first several lines of a file
+ more        Allows you to view lines of a file one page or screen at a time
+             and search for text in that file
+ pg          Same as more but also allows you to go backward in the file
+ pr          Processes files and writes them to the standard output after
+             applying formatting
+ tail        Shows the last several lines of a file
+ tee         Takes the input from a pipeline and allows you to split that
+             output. A copy goes to a file and a copy continues down the pipeline
+ hd          Shows you the contents of files as hexadecimal numbers; a hex dump
+ nl          Adds line numbers to files
+ od          Shows you the contents of files as octal numbers; an octal dump
+
+Miscellaneous:
+
+ baner        Produces an "enlarged" version of the argument passed it
+ write        Allows you to pass messages to a user on his or her screen
+ crypt        Encodes a file for security purposes
+ hello        Allows you to pass a message to a user on his or her screen;
+              similar to write
+ mesg         Controls wheter a user can write messages to your terminal
+
+Office and Desktop Utilities:
+
+ bc            A calculator
+ cal           Produces a calendar
+ mail          Allows for electronic mail
+ calendar      Searches for scheduled events to mail you. Invokes a reminder
+               service
+ checkmail     Checks on the status of mail you have tried to send
+ dc            Another calculator (not as intuitive as bc)
+ news          Checks for the presence of systemwide news
+ spell         Checks spelling of a text file
+
+Printing:
+
+ cancel        Cancel a print job
+ disable       Disables a printer; doesn't allow the queued jobs to print
+ enable        Enables a printer; allows the queued jobs to print on the printer
+ lp , lpr      Queues the request for something to be printed 
+ lpstat , lpq  Checks the status of the system printers and print jobs
+ lprint        Prints files locally to printers attached to terminals
+
+Process Scheduling:
+
+ at / batch    Schedules a job to run at a later time, or when system resources
+               are more suitable
+ cron          Manages when scheduled jobs are run
+ crontab       Submits jobs to run on a routine basis to cron
+ nice          Allows you to run jobs in the background at a different priority
+
+Screen Handling:
+
+ clear         Clears the screen
+ tabs          Sets tab stop on a terminal
+ setcolor      Sets the color palette of an ANSI terminal
+
+Scripting:
+
+ csh            The C shell
+ echo           Takes the named arguments and writes them to standard output
+ line           Reads a line of input from the standard input
+ logname, whoami Reports under what user name you logged in originally
+ sh             The Bourne shell
+ sleep          Stops executing for a defined number of seconds
+ tee            Takes the standard input, redirects that to a file, and passes
+                it on as standard output
+ test           Allows you to test whether a set of criteria are true
+ true           Always returns a zero exit status (used in looping continuously)
+ awk            A programming language to manipulate text files, tipically
+                for creating reports from these text files
+ basename       Returns the file name portion of a path name; it strips
+                the directory name
+ dirname        Opposite of basename; it returns the directory portion if the
+                path name
+ expr           Allows you to evaluate expressions in shell script. These
+                expressions can be mathematical, or string oriented. String
+                functions include returning substrings, length of a string
+                and more
+ yes            Always returns a "y" character, useful if you want to force
+                a positive response to a "yes/no" prompt
+
+Searching:
+
+ what            Searches files for the occurence of the character sequence
+                 @(#), and prints the characters that follows; used in 
+                 SCCS (source code control system)
+ find            Looks for file names that match a certain criteria (name,
+                 file size, modification time, and so on)
+ grep , egrep , fgrep   Searches the contents of files for the text and
+                        patterns passed them
+ strings          Looks for printable character strings in binary files
+
+Serial Communications:
+
+ cu                Allows you to connect to another computer and login as
+                   if you were a terminal at the local site
+ uucp              Allows you to copy files from one machine to another.
+                   uucp is a file transfer program
+
+System Information:
+
+ date               Displys the system date and also can be used to set the
+                    system date
+ devnm              Reports the name of the device where the mounted file
+                    system is stored
+ df                 Reports free space on the file system
+ du                 Reports the space usage for the list of directories given it
+ env                Reports the current environment variables that have been 
+                    exported
+ file               Gives a good estimate as to the nature of the file given
+                    as an argument
+ ps                 Queries the status of processes in the job queue
+ pwd                Reports the present working directory
+ time               Shows how long something took to run
+ tty                Reports the device name of the terminal you are
+                    currently logged onto
+ uname              Reports information on the system, such as node name and
+                    the release of the operating system
+ hwconfig           Shows a listing of the hardware configured on the machine
+ last               Reads from the /etc./wtmp file and reports the history of
+                    logins and logouts from the system
+ swconfig           Reports on the software installed on the system
+ w                  Reports who is logged on the system and what they are doing.
+                    It also reports how many users are on the system, how long
+                    the system has been up, and the load averages
+
+System Maintenance:
+
+ kill                Allows you to kill (send signals to) processes
+ shutdown            Shuts down the system
+ stty                Reports and changes the control settings on ports
+ sync                Forces the write behind buffers to be written to the disk
+ wall                Sends a message to all of the currently logged on users
+ assign / deassign   Allows you to control access to the floppy drives in a 
+                     secure environment
+ mknod               Adds device name "hooks" to kernel device drivers
+ mnt , umnt          Mounts and unmounts file systems
+
+User Information:
+
+ id                   Reports your current user identification
+ logname              Reports how you originally logged onto system
+ w                    Reports who is logged onto the system and what they are
+                      currently running
+ who                  Reports who is logged onto the system
+ whodo                Reports who is logged onto the system and what they are
+                      currently running
+ finger               Allows you to display information about users on the system
+
+User Maintenance:
+
+ newgrp               Allows you to change your working group
+ passwd               Allows you to change your password
+ su                   Allows you to become another user (substitute)
