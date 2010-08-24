@@ -4,6 +4,8 @@ layout: default
 
 ---
 
+# CVS
+
 To safely see what updates would be:
 
 	$ cvs -n up
