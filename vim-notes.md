@@ -7,10 +7,10 @@ title: VIM Notes
 
 Buffer commands:
 
-	bn => buffer next
-	bp => buffer prev
-	bwipe => clear file
-	e filename => load a new file
+	:bn => buffer next
+	:bp => buffer prev
+	:bwipe => clear file
+	:e filename => load a new file
 
 Search and replace
 
@@ -35,6 +35,7 @@ Completion:
 
 Searching:
 
+	/ - search
 	* - searches for the word under the cursor
 	n - next match
 
