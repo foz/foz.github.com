@@ -7,7 +7,7 @@ layout: default
 Foz's Notes
 ===========
 
-A collection of sysadmin/programming notes I've kept over the years. Generally, when I discover something  useful I try to put it here, so I remember it. Since it's in source control and available on various workstations I use, it's a handy thing to do. In August 2010 I decided to throw it up on GitHub pages.
+This is a collection of sysadmin/programming notes I maintain. Generally, when I discover something  useful I try to put it here, so I remember it. 
 
 
 * [Debian](debian-notes.html)
