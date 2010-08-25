@@ -4,13 +4,11 @@ layout: default
 
 ---
 
-Mac OSX stuff
-=============
+# Mac OSX stuff
 
-Darwin Ports
-------------
+## MacPorts
 
-see http://macports.org
+MacPorts gives you a command-line tool "port" that will install countless open source projects on your Mac and keep them up-to-date. Download at [macports.org](http://macports.org). For a Mac-based developer, it's incredibly useful to have. Here are some example commands:
 
 	sudo port -d selfupdate   # update port system and sync
 	sudo port upgrade outdated   # upgrade old ports
@@ -20,10 +18,12 @@ see http://macports.org
     port show [package]
 	sudo port uninstall --follow-dependents all # DELETE ALL!!! 
 
-Useful setup ports to install:
+I find MacPorts easier to use than the [Fink](http://www.finkproject.org/). There's an interesting alternative called [homebrew](http://mxcl.github.com/homebrew/) that uses Ruby and Git.
+
+### Useful packages to install:
 ------------------------------
 
-For osx development:
+For development:
 
 	ImageMagick
 	git-core +svn +bash_completion
@@ -72,24 +72,10 @@ Fun:
 	figlet
 
 
-Mac Droppings (.DS_Store etc)
------------------------------
-
-To make subversion ignore mac files that get written to remote volumes:
-
-  add the following line to ~/.subversion/config :
-
-	global-ignores = ._* .DS_Store
-	
-
-Cron
-----
-
-- On OSX 10.4, cron files live in /var/cron/tabs
-- On OSX 10.5, they are in /usr/lib/cron/tabs
-
 Shell Tricks
 --------------
+
+There's a ton of these at [Secrets](http://secrets.blacktree.com/).
 
 To start the screensaver on the desktop:
 
@@ -119,9 +105,13 @@ Set expanded save dialogs as default
   	
 	$ defaults write -g NSNavPanelExpandedStateForSaveMode -bool TRUE
 
-Change the location of screenshots
+Set the default screenshot format as JPEG (instead of the default, PNG):
 
-  	$ defaults write com.apple.screencapture location /Full/Path/To/Folder
+	$ defaults write com.apple.screencapture type -string JPG
+
+Change the location of screenshots to a different folder (the default is the Desktop)
+
+  	$ defaults write com.apple.screencapture location ~/Desktop/screenshots
 
 Enable debug mode in Safari
 
@@ -133,21 +123,20 @@ Snow Leopard, Ruby and MySQL
 
 I was finally able to get the mysql 2.8.1 gem after a snow leopard upgrade. After trying many different builds, 64 vs. 32, etc, I ended up:
 
-- removing the existing mysql bundle
+- removing the existing mysql bundle (usually only needed after upgrading from 10.5)
 
   	$ sudo rm /Library/Ruby/Site/1.8/universal-darwin10.0/mysql.bundle
 
 - installing 64-bit mysql 5.0/5.1
 
-	Go to mysql.com, download "Mac OS X 10.6 (x86_64)" as .dmg installer
+	Go to mysql.com, download "Mac OS X 10.6 (x86_64)" as .dmg package
 
-- building the gem with this command:
+- build the MySQL gem with this command:
 
   	$ sudo env ARCHFLAGS="-arch x86_64" gem install -V mysql -- --with-mysql-config=/usr/local/mysql/bin/mysql_config
 
 
-MPlayer/mencoder
-----------------
+# MPlayer/mencoder
 
 Again, macports helps here:
 
@@ -158,20 +147,16 @@ To combine a bunch of movies:
  	$ mencoder -oac copy -ovc copy -o "joined.avi" "1.avi" "2.avi"
 
 
-Remote screen sharing, with SSH in the middle as tunnel
--------------------------------------------------------
+# Remote screen sharing, using SSH as tunnel
 
-You have a mac that's on a remote network, but not publically
-accessible. However, a Linux box on that network is.
 
-For example, the remote ssh host (the Linux box) is w.x.y.z.
-192.168.1.10 is the mac's ip address on the remote network.
+You have a mac that's on a remote network, but not publicly accessible. However, a Linux box on that network is.
 
-On you mac, ssh to the remote box with port forwarding:
+On your local Mac, you can SSH to the remote box with port forwarding. In this example _192.168.1.10_ is the Mac on the remote network, while _host.box.com_ is the remote gateway (for example, a linux host):
 
- 	$ ssh -L 1202:192.168.1.10:5900 user@w.x.y.z
+ 	$ ssh -L 1202:192.168.1.10:5900 user@host.box.com
 
-Then, use Command-K to connect to server. Enter this address:
+This will open an ssh session, and the correct VNC ports are opened on your local machine. On your local Mac, use Command-K to connect to server. Enter this as the address:
 
  	vnc://localhost:1202
 

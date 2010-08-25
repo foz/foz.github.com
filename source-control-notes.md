@@ -88,10 +88,14 @@ To convert a working copy between svn versions (1.5 to 1.6 for instance):
 
 	$ /opt/local/share/subversion/tools/client-side/change-svn-wc-format.py . 1.6 --verbose
 
+To make subversion ignore Mac files that get automatically created for icons and Finder settings, add the following line to ~/.subversion/config :
 
-# Git basics
+	global-ignores = ._* .DS_Store
 
-essentials
+
+# GIT
+
+Essentials
 
 	git clone git://url	# checkout a copy
 	git branch -a			# lists branches	
