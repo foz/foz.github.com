@@ -13,31 +13,10 @@ Updating RubyGems:
 
 	$ sudo gem update --system
 
-    (or, on Debian)
-
     $ sudo gem install rubygems-update
 
     $ sudo update_rubygems
-      ( will probably have to reinstall gems after this step, unless
-		you know the trick to preserve previous gems, which i can't remember)
 
-Manually building a gem:
-------------------------
-
-	Say, for instance, you want to link the mysql gem against a certain
-	version of the mysql libraries:
-
-	$ cd /usr/local/lib/ruby/gems/1.8/gems/mysql-2.6 
-	
-	$ sudo ruby extconf.rb --with-mysql-dir=/usr/local/mysql411/
-
-	$ make
-	 
-	$ ruby test.rb mysql-hostname mysql-user mysql-password mysql-port
-
-	$ make install
-
-	(you will need to sudo or be root for the install)
 
 Adding GitHub to RubyGems:
 --------------------------
