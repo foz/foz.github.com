@@ -176,6 +176,7 @@ Finding Code
 	$ find . -name application_helper.rb | xargs mate
 
 Regex Shortcut
+--------------
 
 	You can use a regex in several ways in ruby. The "perl-ish" way
 	is with ~= :
@@ -187,12 +188,11 @@ Regex Shortcut
 
 		text.match(/file no (\d+)/).matches[0]
 
-	This is very clunky. Perhaps the easiest way to extract matches is
-	using the [] method and a regex:
+	Perhaps the easiest way to extract matches is using the [] method and a regex:
+
+		text.to_s[/(\d+)-(\w+)\s+min/i, 2]  # index 2 returns the (\w+) part.
 		
-
-		text[/(\d+)-(\d+)\s+min/i, 2]  # returns the 2nd match
-
+	Using to_s ensures that if text is nil you won't get an exception.
 
 Fix Readline, forward-delete and ~ (tilde) problem on OSX Snow Leopard:
 -----------------------------------------------------------------------
@@ -222,4 +222,60 @@ Install rmagick on debian:
 	$ sudo aptitude install libmagick++9-dev
 	$ sudo gem install rmagick -v 2.13.1
 	
+Ruby Pitfall
+------------
 
+A common Ruby pitfall...
+
+	>> a,b,c=1,4,2
+	[1, 4, 2]
+	>> i = b>a and b<c
+	false
+	>> i
+	true
+
+fix: 
+
+	>> (b>a and b<c)
+	false
+	>> i
+	false
+	
+Caching Tips 
+------------
+
+Via [Rockstar Memcaching](http://www.infoq.com/presentations/lutke-rockstar-memcaching):
+Uses a generation number per user for content (their public pages).
+
+	class ApplicationController < ActionController::Base
+		before_filter :load_shop
+		after_filter :increment_generation
+		
+		def load_shop
+			@current_shop = Shop.find_by_host(request.host)
+		end
+		
+		def increment_generation
+			return if request.get?
+			@current_shop.increment_generation
+		end
+	end	
+	
+	class MyController < ApplicationController::Base
+		around_filter :cache
+		
+		def index; end
+		
+		def cache
+			if content = Rails.cache.get(cache_key)
+				render :text => content, :content_type => :html
+			else
+				yield
+				Rails.cache.set(cache_key, @response.body) if @response.code == 200
+			end
+		end
+		
+		def cache_key
+			"#{request.url}/#{current_shop.generation}/#{cart.size}"
+		end
+	end

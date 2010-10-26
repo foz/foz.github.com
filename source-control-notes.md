@@ -107,7 +107,11 @@ to fix the previous log message (any you didnt push yet)
 	
 	$ git commit --amend
 
-automatically assume a branch for 'git push' and 'git pull':
+reset things to the last commit:
+
+	$ git reset --hard
+
+automatically assume a branch for 'git push' and 'git pull':	
 
 	# edit .git/config:
 
@@ -126,6 +130,23 @@ remove a file totally, from history too
 list remotes
 
 	$ git remote -v
+	
+after you add a files, you can do a diff of staging area vs HEAD, before you commit:
+
+	$ git diff --cached
+
+to see the diff of previous commits vs working copy:
+
+	$ git diff @{1}     # <-- last commit
+	$ git diff @{2}     # <-- last 2 commits	
+	$ git diff @{10}    # <-- last 10 commits	
+	
+	$ git diff eb54dc40   # <-- part of the commit SHA 
+	
+to get rid of a bunch of changes
+
+	$ git stash
+	$ git stash drop
 	
 
 	
