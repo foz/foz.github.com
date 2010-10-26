@@ -7,10 +7,12 @@ layout: default
 Foz's Notes
 ===========
 
-This is a collection of sysadmin/programming notes I maintain. Generally, when I discover something  useful I try to put it here, so I remember it. 
+This is a collection of tech notes I maintain. Generally, when I discover something  useful I try to put it here, so I remember it. 
 
 
 * [Debian](debian-notes.html)
+
+* [Javascript](javascript-notes.html)
 
 * [MacOSX](macosx.html)
 
