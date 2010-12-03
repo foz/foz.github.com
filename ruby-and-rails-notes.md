@@ -120,15 +120,12 @@ Profile your tests
 Favorite Plugins
 ----------------
 
-    * gibberish
     * query_trace
     * acts_as_slugable 
-    * acts_as_state_machine
-    * attachment_fu 
     * betternestedset 
-    * debug_view_helper
     * geokit
     * paginating_find
+	* superdeploy
 
 Script/Console Tricks
 ---------------------
@@ -155,6 +152,11 @@ To install a specific version of a gem:
 
 	$ sudo gem install rails -v 1.2.6
 
+To install a specific branch of a github plugin
+-----------------------------------------------
+
+	$ script/plugin install http://github.com/activescaffold/active_scaffold.git -r rails-2.3
+
 To generate a rails app using a specific installed gem version:
 ---------------------------------------------------------------
 
@@ -173,26 +175,25 @@ Finding Code
 ------------
 	
     # open all your global helpers in all projects
-	$ find . -name application_helper.rb | xargs mate
+	$ find . -name "*helper.rb" | xargs mate
 
 Regex Shortcut
 --------------
 
-	You can use a regex in several ways in ruby. The "perl-ish" way
-	is with ~= :
+You can use a regex in several ways in Ruby. The "perl-ish" way is with `~=` :
 
 		text =~ /file no (\d+)/
 		found = $1
 
-	Another way is using match(), which returns MatchData objects:
+Another way is using `match()`, which returns `MatchData` objects:
 
 		text.match(/file no (\d+)/).matches[0]
 
-	Perhaps the easiest way to extract matches is using the [] method and a regex:
+Perhaps the easiest way to extract matches is using the `[]` method and a regex:
 
 		text.to_s[/(\d+)-(\w+)\s+min/i, 2]  # index 2 returns the (\w+) part.
 		
-	Using to_s ensures that if text is nil you won't get an exception.
+Using `to_s` ensures that if `text` is `nil` you won't get an exception.
 
 Fix Readline, forward-delete and ~ (tilde) problem on OSX Snow Leopard:
 -----------------------------------------------------------------------
