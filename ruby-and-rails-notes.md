@@ -221,14 +221,32 @@ Install rmagick on OSX (be patient, the install can take 20m or more on a reason
 Install rmagick on debian:
 
 	$ sudo aptitude install libmagick++9-dev
-	$ sudo gem install rmagick -v 2.13.1
+	$ sudo gem install rmagick -v 2.12.2
+	
+Test it (using a file called 'mars.jpg', can be any image):
+
+	$ irb
+	>> require 'rubygems'
+	=> false
+	>> require 'RMagick'
+	=> true
+	>> i=Magick::ImageList.new('mars.jpg')
+	=> [mars.jpg JPEG 2400x2400 2400x2400+0+0 DirectClass 8-bit 333kb]
+	>> i.scale!(0.1)
+	=> mars.jpg=>test.png JPEG 2400x2400=>240x240 240x240+0+0 DirectClass 8-bit 2982kb
+	>> i.write('test.png')
+	=> [mars.jpg=>test.png JPEG 2400x2400=>240x240 240x240+0+0 DirectClass 16-bit 155kb]
+	>> exit
+	
+	$ identify test.png
+	test.png PNG 240x240 240x240+0+0 DirectClass 16-bit 155.221kb
 	
 Ruby Pitfall
 ------------
 
 A common Ruby pitfall...
 
-	>> a,b,c=1,4,2
+	>> a,b,c = 1,4,2
 	[1, 4, 2]
 	>> i = b>a and b<c
 	false

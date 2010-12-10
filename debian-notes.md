@@ -84,11 +84,11 @@ To make sure we see important bugs and such, install (can also be annoying tho)
 
 ### Samba hacks
 	
-	Old versions of Samba (2.x) would encode file names using Code Page 850. 
-	The new Samba releases (3.x) now correctly use utf-8. 
+Old versions of Samba (2.x) would encode file names using Code Page 850. 
+The new Samba releases (3.x) now correctly use utf-8. 
 
-	The 'convmv' utility can convert a whole file system so the old crappy characters
-	work with the new code pages.
+The 'convmv' utility can convert a whole file system so the old crappy characters
+work with the new code pages.
 	
 	# test conversion
 	$ convmv -r -f cp850 -t utf8 -i --nfc .
@@ -152,7 +152,7 @@ To make sure we see important bugs and such, install (can also be annoying tho)
 	
 ### how to mount a usb disk automatically when using udev
 
-	From http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev-FAQ ...
+From http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev-FAQ ...
 
 	Q: Can I use udev to automount a USB device when I connect it?
 	A: Technically, yes, but udev is not intended for this. All major distributions
@@ -170,26 +170,28 @@ To make sure we see important bugs and such, install (can also be annoying tho)
 
 	---
 
-    So to set up a new 250g usb drive, I connect a new usb drive and set the label:
+So to set up a new 250g usb drive, I connect a new usb drive and set the label:
 
 	$ sudo e2fslabel /dev/sdx1 new250
 	$ mkdir /media/new250
 	
-	Then, edit fstab and add :
+Then, edit fstab and add :
 
 	/dev/disk/by-label/new250 /media/new250 
 
-	Now, unmount the drive and power cycle it. It can always be mounted with:
+Now, unmount the drive and power cycle it. It can always be mounted with:
 
 	$ mount /media/new250
 
-### Set the label of an MSDOS (vfat) drive and so other stuff:
+### Set the label of an MSDOS (vfat) drive:
 
-    (as root)
-	$ aptitude install mtools
-	(edit /etc/mtools.conf)
+	$ sudo aptitude install mtools
+
+edit /etc/mtools.conf:
+
 	mlabel x:newname
 	
+x = the devic
 
 ### To see what partitions the system knows about, do :
 

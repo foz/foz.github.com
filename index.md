@@ -24,6 +24,8 @@ This is a collection of tech notes I maintain. Generally, when I discover someth
 
 * [Shell Tricks](shell-tricks.html)
 
+* [Installing Rails on Debian Walkthrough](debian-rails-setup.html)
+
 * [Source Control (cvs, svn, git)](source-control-notes.html)
 
 * [Vim](vim-notes.html)

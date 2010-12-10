@@ -35,3 +35,21 @@ Using this class would work like this:
 	var c = new myClass({name: "Joe", age: 26});
 	var str = c.inspect();   // "A person named Joe is 26 years old."
 
+# Javascript weirdness
+
+	>> null >= 0
+	true
+	>> null > 0
+	false
+	>> null <= 0
+	true
+	>> null < 0
+	false
+	>> null >= -1
+	true
+	>> null >= 1
+	false
+	>> null == 0
+	false
+	
+	
