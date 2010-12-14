@@ -112,7 +112,7 @@ create an account for your deploy user
 The deploy user will need some commands for setup and deploying Rails stuff. run `sudo visudo` to edit `/etc/sudoers` as root and, add:
 
 	jeremy    ALL=(ALL) ALL # developer
-	Cmnd_Alias RAILS_DEPLOY=/bin/cp, /bin/ln, /bin/mkdir, /bin/chown, /bin/chmod, /bin/chgrp, /bin/rm, /etc/init.d/nginx
+	Cmnd_Alias RAILS_DEPLOY=/bin/cp, /bin/mv, /bin/ln, /bin/mkdir, /bin/chown, /bin/chmod, /bin/chgrp, /bin/rm, /etc/init.d/nginx
 	deployer ALL=NOPASSWD: RAILS_DEPLOY
 	
 	# Also handy:
@@ -202,11 +202,10 @@ Install fail2ban and denyhosts:
 
 	$ sudo aptitude install fail2ban denyhosts
 
-## setup postfix
+## Set Up Mail
 
 
-See my notes about [installing Postfix as a sending-only relay mailserver](postfix-notes.html).
-
+See the notes about [installing Postfix as a sending-only relay mailserver](postfix-notes.html), in which the mail is outgoing only (smart relay).
 
 ## Install nginx/passenger
 
@@ -368,12 +367,44 @@ Edit `/opt/nginx/conf/nginx.conf` to adjust some things:
 		server_name: mybox.company.com;
 	}
 	
-	include '/sites/myapp.com/shared/config/nginx.conf';
+At the end of the `nginx.conf` file, be sure to include you rails app config(s):
 	
+	include '/sites/myapp.com/shared/config/nginx.conf';	
 	
-Now try deploying:	
+Now try deploying:
 	
 	$ cap deploy:cold
 	$ cap deploy
+
+If everything works ok, your Rails install should be done.
 	
-Try it!
+# Other Services
+
+I suggest installing [Epylog](https://fedorahosted.org/epylog/), which will send you an email every day detailing any interesting logins or activity from the logs. Edit the config file in `/etc/epylog/epylog.conf`, and customize which messages are weeded out in `/etc/epylog/weed_local.cf`.
+
+	$ sudo aptitude install epylog
+
+NTP is essential for keeping things in sync. Just install, nothing to configure really:
+
+	$ sudo aptitude install ntp
+
+And finally, logrotate is handy for keeping the web logs from ballooning:
+
+	$ sudo aptitude install logrotate
+
+Create `/etc/logrotate.d/nginx` and add this:
+
+	/sites/*/shared/log/*log {
+		missingok
+		notifempty
+		sharedscripts
+		postrotate 
+			test ! -f /var/run/nginx.pid || kill -USR1 `cat /var/run/nginx.pid`
+		endscript
+	}
+
+Test that it will work ok (no changes, just verification):
+
+	$ sudo logrotate -d /etc/logrotate.conf
+
+
