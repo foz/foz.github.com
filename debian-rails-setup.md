@@ -335,7 +335,7 @@ Edit `/opt/nginx/conf/nginx.conf` to adjust some things:
 	log_format main ...
 	
 	tcp_nopush on;
-	rcp_nodelay off;
+	tcp_nodelay off;
 	
 	gzip  on;
     gzip_comp_level  2;
