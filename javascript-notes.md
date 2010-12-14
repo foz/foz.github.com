@@ -12,7 +12,7 @@ layout: default
 
 ## Plugins
 
-Some of my favorite jQuery plugins:
+Some of my very favorite jQuery plugins:
 
 * [facebox](http://chriswanstrath.com/facebox/) - a lightbox plugin that looks and works like the Facebook site does. Has a really nice API and callback/event hooks. From the genius/madness of Chris Wanstrath.
 * [FullCalendar](http://arshaw.com/fullcalendar/) - the mother of all calendar plugins, day/week/month, editing, remote json, timezones, the works.
@@ -52,7 +52,7 @@ var myClass = function(opts){
 	var options = opts;
 
 	var inspect = function(){
-		debug('A person named '+options.name+' is '+options.age+' years old.');
+		console.log('A person named '+options.name+' is '+options.age+' years old.');
 	}
 
 	return {
@@ -117,7 +117,8 @@ The `checked` attribute in a checkbox field is only used for the **initial** val
 
 Sometimes its simpler to extract values with a regexp as the first part of an assignment:
 
-```js
+{% highlight js %}
 	var num = /id=(\d+)\/?$/.exec($('input.url').val());
-```
+	var url = /(\d+)\/?$/.exec($('#flickr_url').val());
+{% endhighlight %}
 	

@@ -252,3 +252,19 @@ x = the devic
 	$ update-grub
 	reboot
 
+### Copy a disk image from one server to another ###
+
+    # dd if=/dev/xvda | gzip --fast -c | ssh user@target-server /bin/dd of=/backup/server_disk.img.gz
+    
+### use a variable name dynamically in bash ###
+
+  $ var="what"
+  $ what="cool!"
+  $ echo ${!var}
+  cool!
+
+### Install debian kernel headers ###
+
+    # aptitude install linux-headers-$(uname -r)
+
+ 

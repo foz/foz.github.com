@@ -5,9 +5,9 @@ layout: default
 ---
 # Debian Rails setup
 
-This rough guide is based on the process taken to set up Rails hosting at Linode several times. The basic setup is always using:
+This rough guide is based on the process taken to set up Rails hosting at Linode several times. The basic setup:
 
-* Linode Debian 5.0 (Lenny) VM
+* Linode Debian 6.0 (Squeeze)
 * Ruby on Rails
 * Passenger/Nginx
 * Ruby Enterprise Edition
@@ -43,35 +43,16 @@ Login to Linode, create server, boot, login as root.
 
 ## Install Base Packages
 
-Edit your Apt sources in `/etc/apt/source.list`
-
-	## main & security repositories
+Check `/etc/apt/source.list` and make sure Debian will use your preferred sources. 
 	
-	deb http://ftp.us.debian.org/debian/ lenny main
-	deb-src http://ftp.us.debian.org/debian/ lenny main
-	deb http://security.debian.org/ lenny/updates main
-	deb-src http://security.debian.org/ lenny/updates main
-
-install aptitude
-
-	# apt-get install aptitude
-	
-Update
+First, update all base packages:
 
 	# aptitude update
-
-Upgrade
-
 	# aptitude dist-upgrade
 
-This selection of packages covers most of the needed utilities and libs needed:
+Now install the rest. This selection of packages will provide everything needed for this guide:
 
-	# aptitude install autoconf build-essential git-core module-assistant subversion \
-		vim vim-scripts dnsutils lsof htop rcconf tofrodos zip unzip openssh-client \
-		openssh-server openssh-blacklist-extra iftop libgcrypt11-dev libmysqlclient15-dev \
-		libpcre3-dev libreadline5-dev libssl-dev mysql-client-5.0 mysql-server-5.0 \
-		locales libcurl4-openssl-dev libmagick++9-dev imagemagick wget sudo rsync \
-		munin munin-node ntp
+	# aptitude install autoconf build-essential git-core module-assistant subversion vim vim-scripts dnsutils lsof htop rcconf tofrodos zip unzip openssh-client openssh-server openssh-blacklist-extra iftop libgcrypt11-dev libmysqlclient15-dev libpcre3-dev libreadline5-dev libssl-dev mysql-client-5.0 mysql-server-5.0 locales libcurl4-openssl-dev libmagick++9-dev imagemagick wget sudo rsync munin munin-node ntp
 
 Note: You will be asked to pick a root password for mysql-server. Write it down!
 
@@ -142,13 +123,18 @@ Now set up your shell kit :)
 
 Get Ruby Enterprise edition at http://www.rubyenterpriseedition.com/download.html
 
+	$ cd /usr/local/src
 	$ wget http://rubyforge.org/frs/download.php/71096/ruby-enterprise-1.8.7-2010.02.tar.gz
 	
 Expand, install. When it asks for the installation directory, accept the default path. Helpfully, it will also install rubygems, rake and some other things for you.
 	
 	$ tar -xvf ruby-enterprise-1.8.7-2010.02.tar.gz
 	$ cd ruby-enterprise-1.8.7-2010.02
-	$ sudo ./install
+	$ sudo ./installer
+
+Then link the latest install to `/opt/ruby-enterprise`:
+
+	$ sudo ln -s ruby-enterprise-1.8.7-2010.02 ruby-enterprise
 
 Add the REE bin path to your environment, add this line to .bashrc (for you, the deploy user, and for root):
 
@@ -190,53 +176,58 @@ Edit it and add the MySQL root user info so you can manage databases easily:
 
 ## Install nginx/passenger
 
-Passenger will install nginx automatically:
+Passenger will install nginx automatically (choose option 1, download, compile, install):
 
 	$ sudo /opt/ruby-enterprise/bin/passenger-install-nginx-module
 
 Create an nginx startup script in /etc/init.d/nginx :
 
-	#!/bin/bash
-	#
-	# Nginx init script
-	#
-	NGINX=/opt/nginx/sbin/nginx
-	PID=/opt/nginx/logs/nginx.pid
+{% highlight bash %}
+#!/bin/bash
+#
+# Nginx init script
+#
+NGINX=/opt/nginx/sbin/nginx
+PID=/opt/nginx/logs/nginx.pid
 
-	case "$1" in
-	  start)
-	        echo "Starting nginx..."
-	        $NGINX
-	        echo "."
-	        ;;
-	  stop)
-	        echo "Shutting down nginx"
-	        kill -15 `cat $PID`
-	        sleep 1
-	        echo "."
-	        ;;
-	  restart)
-	        echo "Restarting nginx..."
-	        $0 stop
-	        echo "sleeping 2 seconds..."
-	        sleep 2
-	        $0 start
-	        ;;
-	  reload)
-	        echo "Reloading nginx configuration..."
-	        kill -1 `cat $PID`
-	        ;;
-	  conftest)
-	        echo "Nginx config test..."
-	        $NGINX -t
-	        ;;
-	  *)
-	        echo "Usage: $0 {start|stop|restart|reload|conftest)"
-	        exit 1
-	        ;;
-	esac
+case "$1" in
+  start)
+        echo "Starting nginx..."
+		$NGINX
+        echo "."
+        ;;
+  stop)
+        echo "Shutting down nginx"
+        kill -TERM $PID
+        echo "."
+        ;;
+  restart)
+        echo "Restarting nginx..."
+        $0 stop
+        echo "sleeping 10 seconds..."
+        sleep 10
+        $0 start
+        ;;
+  reload)
+  		echo "Reloading nginx configuration..."
+  		kill -HUP $PID
+  		;;
+  logs)
+		echo "Reopening log files..."
+		kill -USR1 $PID
+		;;
+  conftest)
+  		echo "Nginx config test..."
+  		$NGINX -t
+  		;;
+  *)
+	echo "Usage: $0 {start|stop|restart|reload|logs|conftest)"
+    exit 1
+    ;;
+esac
 
-	exit 0
+exit 0
+{% endhighlight %}
 	
 And make it executable:
 
@@ -244,7 +235,7 @@ And make it executable:
 	
 And make it start automatically on boot:
 
-	$ update-rc.d nginx defaults
+	$ sudo update-rc.d nginx defaults
 	
 ## Create the app db
 
@@ -321,6 +312,7 @@ Make a database.yml file in `shared/config/database.yml`, which should get copie
 
 Create an nginx config files and check into your git repo (in `config/server/nginx.conf` for example). Here's a sample:
 
+{% highlight nginx %}
 	server {
 		listen		1.2.3.4:80;
 		server_name www.myapp.com;
@@ -352,10 +344,11 @@ Create an nginx config files and check into your git repo (in `config/server/ngi
 		server_name 	myapp.com;
 		rewrite ^(.*) 	http://www.myapp.com/;
 	}
-	
+{% endhighlight %}
 
 Edit `/opt/nginx/conf/nginx.conf` to adjust some things:
 
+{% highlight nginx %}
 	worker_processes  4;
 	error_log  logs/error.log;
 	
@@ -376,10 +369,13 @@ Edit `/opt/nginx/conf/nginx.conf` to adjust some things:
 	server {
 		server_name: mybox.company.com; # this is your default site
 	}
-	
+{% endhighlight %}
+
 At the end of the `nginx.conf` file, be sure to include you rails app config(s):
-	
+
+{% highlight nginx %}
 	include '/sites/myapp.com/shared/config/nginx.conf';	
+{% endhighlight %}
 
 # Deploy! 
 
@@ -431,6 +427,7 @@ I like [Epylog](https://fedorahosted.org/epylog/), which will send you an email 
 NTP is essential for keeping the server time correct. Just install, nothing to configure really:
 
 	$ sudo aptitude install ntp
+	$ sudo /etc/init.d/ntp start	
 	
 To check if NTP is connected to any servers, run:
 

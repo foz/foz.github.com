@@ -117,6 +117,9 @@ Enable debug mode in Safari
 
 	$ defaults write com.apple.Safari WebKitDeveloperExtras -bool true
 
+To see what processes are using the disk:
+
+    $ sudo fs_usage -f filesys
 
 Snow Leopard, Ruby and MySQL
 ----------------------------
