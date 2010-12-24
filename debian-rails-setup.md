@@ -380,15 +380,22 @@ If everything works ok, your Rails install should be done.
 	
 # Other Services
 
+
+## Epylog
+
 I suggest installing [Epylog](https://fedorahosted.org/epylog/), which will send you an email every day detailing any interesting logins or activity from the logs. Edit the config file in `/etc/epylog/epylog.conf`, and customize which messages are weeded out in `/etc/epylog/weed_local.cf`.
 
 	$ sudo aptitude install epylog
+
+## NTP
 
 NTP is essential for keeping things in sync. Just install, nothing to configure really:
 
 	$ sudo aptitude install ntp
 
-And finally, logrotate is handy for keeping the web logs from ballooning:
+## Logrotate
+
+logrotate is handy for keeping the web logs from ballooning:
 
 	$ sudo aptitude install logrotate
 
@@ -407,4 +414,11 @@ Test that it will work ok (no changes, just verification):
 
 	$ sudo logrotate -d /etc/logrotate.conf
 
+## Backups
+
+For backups, you probably want to take database snapshots, and get a copy of user-uploaded files. These will be moved to another server for safekeeping.
+
+For the database snapshots, use a mysql backup script and schedule it to run every night. For example, [I use this one](https://gist.github.com/549062), which will make a dated dumpfile of each database and put them in a common directory.
+
+On a separate server, set up SSH keys and a cron job to rsync files/db dumps to your backup server.
 
