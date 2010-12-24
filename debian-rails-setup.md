@@ -1,8 +1,3 @@
----
-title: Installing Rails, Passenger, REE, MySQL, Nginx and more on Debian 5.0
-layout: default
-
----
 
 # Debian Rails setup
 
@@ -136,8 +131,10 @@ Copy your SSH public key to the new box, and test to make sure you can log in:
 	$ ssh deployer@mybox uname -a
 	
 Now set up your shell kit :)
+
+# Ruby, Rails and MySQL
 	
-## Install Ruby (REE)
+## Ruby Enterprise Edition
 
 Get Ruby Enterprise edition at http://www.rubyenterpriseedition.com/download.html
 
@@ -186,26 +183,6 @@ Edit it and add the MySQL root user info so you can manage databases easily:
 	[client]
 	user=root
 	password=xxxxxxxxxxx
-
-## Security Stuff
-
-Edit /etc/ssh/sshd_config. Restrict ssh logins to certain users only.
-
-	PermitRootLogin no
-	AllowUsers jeremy deployer
-
-Restart ssh:
-
-	$ sudo /etc/init.d/ssh restart
-
-Install fail2ban and denyhosts:
-
-	$ sudo aptitude install fail2ban denyhosts
-
-## Set Up Mail
-
-
-See the notes about [installing Postfix as a sending-only relay mailserver](postfix-notes.html), in which the mail is outgoing only (smart relay).
 
 ## Install nginx/passenger
 
@@ -353,7 +330,7 @@ Edit `/opt/nginx/conf/nginx.conf` to adjust some things:
 	log_format main ...
 	
 	tcp_nopush on;
-	rcp_nodelay off;
+	tcp_nodelay off;
 	
 	gzip  on;
     gzip_comp_level  2;
@@ -378,12 +355,32 @@ Now try deploying:
 
 If everything works ok, your Rails install should be done.
 	
-# Other Services
+# Post-Install
 
+Wait, there's still a number of things related to security and upkeep to install!
+
+## Security Stuff
+
+Edit /etc/ssh/sshd_config. Restrict ssh logins to certain users only.
+
+	PermitRootLogin no
+	AllowUsers jeremy deployer
+
+Restart ssh:
+
+	$ sudo /etc/init.d/ssh restart
+
+Install fail2ban and denyhosts, to help keep the script-kiddies away.
+
+	$ sudo aptitude install fail2ban denyhosts
+
+## Set Up Mail
+
+See my notes about [installing Postfix as a sending-only relay mailserver](postfix-notes.html).
 
 ## Epylog
 
-I suggest installing [Epylog](https://fedorahosted.org/epylog/), which will send you an email every day detailing any interesting logins or activity from the logs. Edit the config file in `/etc/epylog/epylog.conf`, and customize which messages are weeded out in `/etc/epylog/weed_local.cf`.
+I like [Epylog](https://fedorahosted.org/epylog/), which will send you an email every day summarizing any  user logins and unusual activity from the logs. Edit the config file in `/etc/epylog/epylog.conf`, and customize which messages are weeded out in `/etc/epylog/weed_local.cf`.
 
 	$ sudo aptitude install epylog
 
@@ -392,6 +389,10 @@ I suggest installing [Epylog](https://fedorahosted.org/epylog/), which will send
 NTP is essential for keeping things in sync. Just install, nothing to configure really:
 
 	$ sudo aptitude install ntp
+	
+To check if NTP is connected to any servers, run:
+
+	$ ntpq -c peers localhost
 
 ## Logrotate
 
@@ -414,11 +415,19 @@ Test that it will work ok (no changes, just verification):
 
 	$ sudo logrotate -d /etc/logrotate.conf
 
+## /etc with git
+
+I like to put `/etc` under version control with git. Just in case I need to review a change, or roll back something. It's not a true security measure (no checksums etc) but its helpful. Sudo is required to do checkins.
+
+	$ cd /etc
+	$ sudo git init
+	$ sudo git add .
+	$ sudo git commit -am 'first checkin, new server installed'
+
 ## Backups
 
-For backups, you probably want to take database snapshots, and get a copy of user-uploaded files. These will be moved to another server for safekeeping.
+For backups, you probably want to take database snapshots, and make a copy of all user-uploaded files. These will be moved to another server for safekeeping. You may also want to back up config files.
 
-For the database snapshots, use a mysql backup script and schedule it to run every night. For example, [I use this one](https://gist.github.com/549062), which will make a dated dumpfile of each database and put them in a common directory.
+For the database snapshots, a mysql backup script and cron job to run it every night works well. For example, [I use this one](https://gist.github.com/549062), which will make a dated dumpfile of each database and put them in a common directory on the web server, while removing the old ones.
 
-On a separate server, set up SSH keys and a cron job to rsync files/db dumps to your backup server.
-
+On a separate backup server, set up SSH keys and a cron job to rsync files/db dumps from the web server. You might also consider using Amazon S3 for your off-site backups and pushing files to a bucket. Sensitive data always needs to be encrypted.
