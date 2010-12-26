@@ -9,6 +9,7 @@ Foz's Notes
 
 This is a collection of tech notes I maintain. Generally, when I discover something  useful I try to put it here, so I remember it. 
 
+* [Installing Rails on Debian Walkthrough](debian-rails-setup.html)
 
 * [Debian](debian-notes.html)
 
@@ -23,8 +24,6 @@ This is a collection of tech notes I maintain. Generally, when I discover someth
 * [Ruby and Rails](ruby-and-rails-notes.html)
 
 * [Shell Tricks](shell-tricks.html)
-
-* [Installing Rails on Debian Walkthrough](debian-rails-setup.html)
 
 * [Source Control (cvs, svn, git)](source-control-notes.html)
 

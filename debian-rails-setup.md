@@ -1,4 +1,8 @@
+---
+title: Debian Rails Setup
+layout: default
 
+---
 # Debian Rails setup
 
 This rough guide is based on the process taken to set up Rails hosting at Linode several times. The basic setup is always using:
