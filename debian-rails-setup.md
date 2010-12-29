@@ -71,7 +71,7 @@ This selection of packages covers most of the needed utilities and libs needed:
 		openssh-server openssh-blacklist-extra iftop libgcrypt11-dev libmysqlclient15-dev \
 		libpcre3-dev libreadline5-dev libssl-dev mysql-client-5.0 mysql-server-5.0 \
 		locales libcurl4-openssl-dev libmagick++9-dev imagemagick wget sudo rsync \
-		munin munin-node
+		munin munin-node ntp
 
 Note: You will be asked to pick a root password for mysql-server. Write it down!
 
@@ -289,25 +289,25 @@ Verify the host keys for GitHub. Type `yes` when asked:
 	
 	deployer@mybox:-$ exit
 	
-On the server, set up the rails app directory:
+Using your dev account, set up the rails app directory:
 
 	$ sudo mkdir -p /sites/myapp.com
 	$ sudo chgrp www-data /sites/myapp.com
 	$ sudo chmod 2775 /sites/myapp.com
 
-From your local working copy of the app, run
+From your local working copy of the app, try to run the Capistrano setup task and check the results. Both should work without errors. If there are problems, you should see them in this step and be able to fix them. 
 
 	$ cap deploy:setup
 	$ cap deploy:check
 	
-On the server, add `shared/config` for deployed config files:
+On the server, add a directory `shared/config` for putting config files:
 
 	$ cd /sites/myapp.com
 	$ sudo mkdir shared/config
 	$ sudo chgrp www-data shared/config
 	$ sudo chmod 2775 shared/*
 	
-Make a database.yml file in `shared/config/database.yml`:
+Make a database.yml file in `shared/config/database.yml`, which should get copied into place after each deploy:
 
 	production:
 	  adapter: mysql
@@ -317,13 +317,42 @@ Make a database.yml file in `shared/config/database.yml`:
 	  username: myapp
 	  password: xxxxxxxxxx	
 
-Create an nginx config files and check into your git repo (in `config/server/nginx.conf` for example).
+# Nginx configuration
 
-Make sure your deploy script is set up for the new server:
+Create an nginx config files and check into your git repo (in `config/server/nginx.conf` for example). Here's a sample:
 
-* production/staging server hostname/git branch/paths are set
-* errors out when no stage is specified
-* after deploy, links nginx into `shared/config` and copies `shared/config/database.yml` to `#{release_path}/config`
+	server {
+		listen		1.2.3.4:80;
+		server_name www.myapp.com;
+
+		root		/sites/myapp.com/current/public;
+
+		passenger_enabled on;
+		passenger_use_global_queue on;
+		rails_env production;
+
+		access_log 	/sites/myapp.com.com/shared/log/nginx.log main;
+
+		# allow big uploads
+		client_max_body_size 20M;
+
+		error_page 500 502 503 504  /500.html;
+
+		if (-f $document_root/system/maintenance.html) {
+		    rewrite ^(.*)$ /system/maintenance.html break;
+		}
+		if (-f $request_filename.html) {
+		  rewrite (.*) $1.html break;
+		}
+	}
+
+	# redirect bare url to www:
+	server {
+		listen          1.2.3.4:80;
+		server_name 	myapp.com;
+		rewrite ^(.*) 	http://www.myapp.com/;
+	}
+	
 
 Edit `/opt/nginx/conf/nginx.conf` to adjust some things:
 
@@ -345,19 +374,26 @@ Edit `/opt/nginx/conf/nginx.conf` to adjust some things:
                 application/xml application/xml+rss text/javascript;
 
 	server {
-		server_name: mybox.company.com;
+		server_name: mybox.company.com; # this is your default site
 	}
 	
 At the end of the `nginx.conf` file, be sure to include you rails app config(s):
 	
 	include '/sites/myapp.com/shared/config/nginx.conf';	
+
+# Deploy! 
+
+Make sure your deploy script is set up for the new server:
+
+* hostname/git branch/paths are set
+* any secondary bits are deploying correctly, like NewRelic, Hoptoad, whenever, delayed_job, etc.
+* after deploy, the links nginx into `shared/config` and copies `shared/config/database.yml` to `#{release_path}/config`
 	
-Now try deploying:
+Try deploying:
 	
-	$ cap deploy:cold
 	$ cap deploy
 
-If everything works ok, your Rails install should be done.
+If everything works ok, then congrats :)
 	
 # Post-Install
 
@@ -390,7 +426,7 @@ I like [Epylog](https://fedorahosted.org/epylog/), which will send you an email 
 
 ## NTP
 
-NTP is essential for keeping things in sync. Just install, nothing to configure really:
+NTP is essential for keeping the server time correct. Just install, nothing to configure really:
 
 	$ sudo aptitude install ntp
 	
