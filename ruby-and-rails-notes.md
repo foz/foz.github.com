@@ -248,18 +248,26 @@ A common Ruby pitfall...
 
 	>> a,b,c = 1,4,2
 	[1, 4, 2]
-	>> i = b>a and b<c
+	>> i = b > a and b < c
 	false
 	>> i
 	true
 
 fix: 
 
-	>> (b>a and b<c)
+	>> i = (b > a and b < c)
 	false
 	>> i
 	false
 	
+Migrations
+----------
+
+To make a BIGINT column:
+
+	t.integer :author_id, :limit => 8	
+	
+		
 Caching Tips 
 ------------
 
