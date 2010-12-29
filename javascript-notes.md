@@ -14,49 +14,50 @@ layout: default
 
 Calling `console.log` works great with Firebug or the Safari Developer Tools, but it will kill IE and other browsers with a javascript error. And it's easy to forget to remove them before updating a web site. So I've started using a global debug function instead:
 
-```js
-	function debug(){
-		if (typeof console != "undefined"){
-			if (console.log){
-				if (arguments.length == 1){
-					console.log(arguments[0]);
-				} else {
-					console.log(arguments);
-				}
+{% highlight js %}
+function debug(){
+	if (typeof console != "undefined"){
+		if (console.log){
+			if (arguments.length == 1){
+				console.log(arguments[0]);
+			} else {
+				console.log(arguments);
 			}
 		}
 	}
-```
+}
+{% endhighlight %}
 
 This lets you pass any number of arguments to `debug()` and it will print nicely. In production the code won't blow up.
 
 ## Generalized Class (a.k.a. "Module Reveal Pattern")
 
-```js
-	var myClass = function(opts){
-		var options = opts;
-	
-		var inspect = function(){
-			debug('A person named '+options.name+' is '+options.age+' years old.');
-		}
-		
-		return {
-			inspect: inspect,
-			test: function(){ alert('test'); },
-			name: function(){ return options.name; }
-		};
+{% highlight js %}
+var myClass = function(opts){
+	var options = opts;
+
+	var inspect = function(){
+		debug('A person named '+options.name+' is '+options.age+' years old.');
+	}
+
+	return {
+		inspect: inspect,
+		test: function(){ alert('test'); },
+		name: function(){ return options.name; }
 	};
-```
+};
+{% endhighlight %}
 
 Using this class would work like this:
-```js
-	var c = new myClass({name: "Joe", age: 26});
-	var str = c.inspect();   // "A person named Joe is 26 years old."
-```
+{% highlight js %}
+var c = new myClass({name: "Joe", age: 26});
+var str = c.inspect();   // "A person named Joe is 26 years old."
+{% endhighlight %}
+
 # Javascript weirdness
 
 Null is weird:
-```js
+
 	>> null >= 0
 	true
 	>> null > 0
@@ -73,11 +74,9 @@ Null is weird:
 	false
 	>> null == false
 	false
-```
 	
 Equality (==) can be misleading. It doesn't work the same way as in languages, it does type conversions before the compare. You must use === to be certain:
 
-```js
 	>> "123" == 123  
 	true
 	>> 1 == true
@@ -90,5 +89,4 @@ Equality (==) can be misleading. It doesn't work the same way as in languages, i
 	false
 	>> 1 === true
 	false
-```
 

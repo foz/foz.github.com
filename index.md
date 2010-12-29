@@ -9,29 +9,29 @@ Foz's Notes
 
 This is a collection of tech notes I maintain. Generally, when I discover something  useful I try to put it here, so I remember it. 
 
-* [[Installing Rails on Debian Walkthrough|debian-rails-setup]]
+* [Debian](debian-notes.html)
 
-* [[Debian|debian-notes]]
+* [Javascript](javascript-notes.html)
 
-* [[Javascript|javascript-notes]]
+* [MacOSX](macosx.html)
 
-* [[MacOSX|macosx]]
+* [MySQL](mysql-notes.html)
 
-* [[MySQL|mysql-notes]]
+* [Postfix](postfix-notes.html)
 
-* [[Postfix|postfix-notes]]
+* [Rails on Debian - Installation Walkthrough](debian-rails-setup.html)
 
-* [[Ruby and Rails|ruby-and-rails-notes]]
+* [Ruby and Rails](ruby-and-rails-notes.html)
 
-* [[Shell Tricks|shell-tricks]]
+* [Shell Tricks](shell-tricks.html)
 
-* Source Control [[cvs|cvs-notes]], [[svn|svn-notes]], and [[git|git-notes]]
+* Source Control [cvs](cvs-notes.html), [svn](svn-notes.html), and [git](git-notes.html)
 
-* [[Vim|vim-notes]]
+* [Vim](vim-notes.html)
 
 
 Other Stuff
 
-* [[Favorite Quotes and Funny Stuff|code_quotes]]
+* [Favorite Quotes and Funny Stuff](code_quotes.html)
 
-> The [markdown source](http://github.com/foz/foz.github.com) for this site is at GitHub. It uses Github Pages, and I use [gollum](https://github.com/github/gollum) for local editing.
+> The [markdown source](http://github.com/foz/foz.github.com) for this site is at GitHub. It uses Github Pages, and I use [jekyll](https://github.com/mojombo/jekyll/wiki) for local editing.
