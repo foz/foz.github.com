@@ -8,11 +8,11 @@ layout: default
 
 ## Use Good Tools
 
-Firebug makes js development much easier. FireQuery makes jQuery development rock.
+[Firebug](http://getfirebug.com/) makes js development much easier. [FireQuery](http://firequery.binaryage.com/) makes jQuery development rock.
 
-## Use Smart Debugging
+## Avoid console.log
 
-Calling `console.log` works great with Firebug or the Safari Developer Tools, but it will kill IE and other browsers with a javascript error. I use a debug function instead:
+Calling `console.log` works great with Firebug or the Safari Developer Tools, but it will kill IE and other browsers with a javascript error. And it's easy to forget to remove them before updating a web site. So I've started using a global debug function instead:
 
 ```js
 	function debug(){
@@ -27,6 +27,8 @@ Calling `console.log` works great with Firebug or the Safari Developer Tools, bu
 		}
 	}
 ```
+
+This lets you pass any number of arguments to `debug()` and it will print nicely. In production the code won't blow up.
 
 ## Generalized Class (a.k.a. "Module Reveal Pattern")
 
