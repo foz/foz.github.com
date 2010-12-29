@@ -11,7 +11,7 @@ This is a collection of tech notes I maintain. Generally, when I discover someth
 
 * [Installing Rails on Debian Walkthrough](debian-rails-setup.html)
 
-* [Debian](debian-notes.html)
+* [Debian][[debian-notes]]
 
 * [Javascript](javascript-notes.html)
 
@@ -25,7 +25,7 @@ This is a collection of tech notes I maintain. Generally, when I discover someth
 
 * [Shell Tricks](shell-tricks.html)
 
-* [Source Control (cvs, svn, git)](source-control-notes.html)
+* Source Control ([cvs](cvs-notes.html), [svn](svn-notes.html), and [git](git-notes.html))
 
 * [Vim](vim-notes.html)
 
@@ -34,4 +34,4 @@ Other Stuff
 
 * [Favorite Quotes and Funny Stuff](code_quotes.html)
 
-> The [source for this site is at GitHub](http://github.com/foz/foz.github.com). 
+> The [markdown source](http://github.com/foz/foz.github.com) for this site is at GitHub. It uses Github Pages, and I use [gollum](https://github.com/github/gollum) for local editing.

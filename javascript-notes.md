@@ -1,3 +1,9 @@
+---
+title: Javascript Notes
+layout: default
+
+---
+
 # Javascript Tricks and Patterns
 
 ## Use Good Tools
