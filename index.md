@@ -9,25 +9,25 @@ Foz's Notes
 
 This is a collection of tech notes I maintain. Generally, when I discover something  useful I try to put it here, so I remember it. 
 
-* [Installing Rails on Debian Walkthrough](debian-rails-setup.html)
+* [[Installing Rails on Debian Walkthrough|(debian-rails-setup]]
 
-* [Debian][[debian-notes]]
+* [[Debian|debian-notes]]
 
-* [Javascript](javascript-notes.html)
+* [[Javascript|javascript-notes]]
 
-* [MacOSX](macosx.html)
+* [[MacOSX|macosx]]
 
-* [MySQL](mysql-notes.html)
+* [[MySQL|mysql-notes.html]
 
-* [Postfix](postfix-notes.html)
+* [[Postfix|postfix-notes]]
 
-* [Ruby and Rails](ruby-and-rails-notes.html)
+* [[Ruby and Rails|ruby-and-rails-notes]]
 
-* [Shell Tricks](shell-tricks.html)
+* [[Shell Tricks|shell-tricks]]
 
-* Source Control ([cvs](cvs-notes.html), [svn](svn-notes.html), and [git](git-notes.html))
+* Source Control [[cvs|cvs-notes]], [[svn|svn-notes]], and [[git|git-notes]]
 
-* [Vim](vim-notes.html)
+* [[Vim|vim-notes]]
 
 
 Other Stuff
