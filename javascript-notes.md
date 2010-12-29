@@ -14,6 +14,7 @@ Firebug makes js development much easier. FireQuery makes jQuery development roc
 
 Calling `console.log` works great with Firebug or the Safari Developer Tools, but it will kill IE and other browsers with a javascript error. I use a debug function instead:
 
+```js
 	function debug(){
 		if (typeof console != "undefined"){
 			if (console.log){
@@ -25,9 +26,11 @@ Calling `console.log` works great with Firebug or the Safari Developer Tools, bu
 			}
 		}
 	}
-	
+```
+
 ## Generalized Class (a.k.a. "Module Reveal Pattern")
 
+```js
 	var myClass = function(opts){
 		var options = opts;
 	
@@ -41,16 +44,17 @@ Calling `console.log` works great with Firebug or the Safari Developer Tools, bu
 			name: function(){ return options.name; }
 		};
 	};
+```
 
 Using this class would work like this:
-
+```js
 	var c = new myClass({name: "Joe", age: 26});
 	var str = c.inspect();   // "A person named Joe is 26 years old."
-
+```
 # Javascript weirdness
 
 Null is weird:
-
+```js
 	>> null >= 0
 	true
 	>> null > 0
@@ -67,9 +71,11 @@ Null is weird:
 	false
 	>> null == false
 	false
+```
 	
-Equality is misleading. It doesn't work the same way as in languages like Ruby or PHP. Use === to be certain:
+Equality (==) can be misleading. It doesn't work the same way as in languages, it does type conversions before the compare. You must use === to be certain:
 
+```js
 	>> "123" == 123  
 	true
 	>> 1 == true
@@ -82,4 +88,4 @@ Equality is misleading. It doesn't work the same way as in languages like Ruby o
 	false
 	>> 1 === true
 	false
-	
+```	

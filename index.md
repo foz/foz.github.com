@@ -9,7 +9,7 @@ Foz's Notes
 
 This is a collection of tech notes I maintain. Generally, when I discover something  useful I try to put it here, so I remember it. 
 
-* [[Installing Rails on Debian Walkthrough|(debian-rails-setup]]
+* [[Installing Rails on Debian Walkthrough|debian-rails-setup]]
 
 * [[Debian|debian-notes]]
 
@@ -17,7 +17,7 @@ This is a collection of tech notes I maintain. Generally, when I discover someth
 
 * [[MacOSX|macosx]]
 
-* [[MySQL|mysql-notes.html]
+* [[MySQL|mysql-notes]]
 
 * [[Postfix|postfix-notes]]
 
@@ -32,6 +32,6 @@ This is a collection of tech notes I maintain. Generally, when I discover someth
 
 Other Stuff
 
-* [Favorite Quotes and Funny Stuff](code_quotes.html)
+* [[Favorite Quotes and Funny Stuff|code_quotes]]
 
 > The [markdown source](http://github.com/foz/foz.github.com) for this site is at GitHub. It uses Github Pages, and I use [gollum](https://github.com/github/gollum) for local editing.
