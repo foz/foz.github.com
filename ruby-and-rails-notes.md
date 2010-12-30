@@ -306,3 +306,12 @@ Uses a generation number per user for content (their public pages).
 			"#{request.url}/#{current_shop.generation}/#{cart.size}"
 		end
 	end
+
+Mocha
+-----
+
+In some cases under Rails 2.3 with Bundler, Mocha will not load right. This results is complaints about "Undefined method `mock`" etc. The solution is to have this in Gemfile:
+
+	gem 'mocha', '0.9.8', :require => false
+	
+The `require => false` bit prevents Mocha from loading until the test framework loads (which means `require 'mocha'` should be in `test_helper.rb`).
