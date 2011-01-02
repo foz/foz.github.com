@@ -6,13 +6,28 @@ layout: default
 
 # Javascript Tricks and Patterns
 
-## Use Good Tools
+## Good Tools
 
 [Firebug](http://getfirebug.com/) makes js development much easier. [FireQuery](http://firequery.binaryage.com/) makes jQuery development rock.
 
+## Plugins
+
+Some of my favorite jQuery plugins:
+
+* [facebox](http://chriswanstrath.com/facebox/) - a lightbox plugin that looks and works like the Facebook site does. Has a really nice API and callback/event hooks. From the genius/madness of Chris Wanstrath.
+* [FullCalendar](http://arshaw.com/fullcalendar/) - the mother of all calendar plugins, day/week/month, editing, remote json, timezones, the works.
+* [prettyCheckboxes](http://www.no-margin-for-errors.com/projects/prettyCheckboxes/) - nice styling of HTML checkbox elements, customizable.
+* [jQuery hotkeys](https://github.com/jeresig/jquery.hotkeys) - fork by John Resig, lets you easily assign keyboard shortcuts to your web app.
+* [jQPlot](http://www.jqplot.com/) - charts, graphs, etc. with loads of options, plugins, and variations. Flexible API.
+* [jCrop](http://deepliquid.com/content/Jcrop.html) - for drawing rectangular regions and storing the coordinates.
+* [timeEntry](http://keith-wood.name/timeEntry.html) - makes a smart time input box with minutes/hours/am-pm, set steps and validation filters.
+* [jQuery Star-Rating](http://www.fyneworks.com/jquery/star-rating/) - Transforms radio buttons into a nice-looking interactive widget for ranking/rating. 
+* [blockUI](http://malsup.com/jquery/block/) - present a modal dialog and disable/dim the underlying page. Useful for error messages, dialogs, or progress indicators.
+* [jHtmlArea](http://jhtmlarea.codeplex.com) - as far as WYSIWYG editors go, this one is pretty basic. But that can be a good thing. Unlike more popular editors, this one is more hackable. The project is not well maintained any more, and the API is goofy, but it's good for simple things and easy to get going.
+
 ## Avoid console.log
 
-Calling `console.log` works great with Firebug or the Safari Developer Tools, but it will kill IE and other browsers with a javascript error. And it's easy to forget to remove them before updating a web site. So I've started using a global debug function instead:
+Calling `console.log` works great for debugging with Firebug or the Safari Developer Tools, but in production, it can kill IE and other browsers with a javascript error. It's all too easy to forget to remove those log messages before deploying an update. So I've started using a global debug function instead:
 
 {% highlight js %}
 function debug(){
@@ -28,9 +43,9 @@ function debug(){
 }
 {% endhighlight %}
 
-This lets you pass any number of arguments to `debug()` and it will print nicely. In production the code won't blow up.
+You can pass any number of arguments to `debug()` and they will print nicely. In production the code won't blow up.
 
-## Generalized Class (a.k.a. "Module Reveal Pattern")
+## A Generalized Class (a.k.a. "Module Reveal Pattern")
 
 {% highlight js %}
 var myClass = function(opts){
