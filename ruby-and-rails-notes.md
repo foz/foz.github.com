@@ -315,3 +315,23 @@ In some cases under Rails 2.3 with Bundler, Mocha will not load right. This resu
 	gem 'mocha', '0.9.8', :require => false
 	
 The `require => false` bit prevents Mocha from loading until the test framework loads (which means `require 'mocha'` should be in `test_helper.rb`).
+
+
+Internals
+---------
+
+## What launched rails?
+
+ENV has:
+
+	>> ENV['_']
+	'script/server'
+	or
+	'/usr/bin/irb'
+	
+You can also check `caller[-1]` which will be the first program on the call stack. This might give you `script/server:3` or it may be something less obvious like `"/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/irb/workspace.rb:52"`.
+
+If you want to know if the server is running, you can check for:
+
+	ENV['RACK_ENV'].present?
+	

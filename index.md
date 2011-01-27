@@ -1,13 +1,14 @@
 ---
 title: Foz's Notes
 layout: default
-
 ---
 
-Foz's Notes
-===========
+# Foz's Notes
 
-This is a collection of tech notes I maintain. Generally, when I discover something  useful I try to put it here, so I remember it. 
+
+A tech notebook of storts. Generally, when I discover something useful I try to put it here, so I remember it. 
+
+* [Cocoa](cocoa-notes.html)
 
 * [Debian](debian-notes.html)
 
@@ -34,4 +35,4 @@ Other Stuff
 
 * [Favorite Quotes and Funny Stuff](code_quotes.html)
 
-> The [markdown source](http://github.com/foz/foz.github.com) for this site is at GitHub. It uses Github Pages, and I use [jekyll](https://github.com/mojombo/jekyll/wiki) for local editing.
+> I keep the source files for this site at [GitHub](http://github.com/foz/foz.github.com) and use [jekyll](https://github.com/mojombo/jekyll/wiki) for local editing and [Github Pages](http://pages.github.com/) to host.

@@ -414,6 +414,8 @@ Install fail2ban and denyhosts, to help keep the script-kiddies away.
 
 	$ sudo aptitude install fail2ban denyhosts
 
+Edit `/etc/sysctl.conf` and enable basic protection settings by reading the comments. More details and suggestions are [here](http://www.cyberciti.biz/faq/linux-kernel-etcsysctl-conf-security-hardening/).
+
 ## Set Up Mail
 
 See my notes about [installing Postfix as a sending-only relay mailserver](postfix-notes.html).
