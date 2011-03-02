@@ -105,3 +105,11 @@ Equality (==) can be misleading. It doesn't work the same way as in languages, i
 	>> 1 === true
 	false
 
+# Using regular expressions
+
+Sometimes its simpler to extract values with a regexp as the first part of an assignment:
+
+```js
+	var url = /(\d+)\/?$/.exec($('#flickr_url').val());
+```
+	
