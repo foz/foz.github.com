@@ -43,3 +43,5 @@ Also via [Mike Taylor](http://reprog.wordpress.com/)
 [Drew Houston](http://www.slideshare.net/gueste94e4c/dropbox-startup-lessons-learned-3836587), CEO of  [Dropbox](http://getdropbox.com), on trying to grow a product through AdWords (which didn't work out well for them)
 > "Search is a way to HARVEST demand, not to CREATE it"
 
+> Design is not just what it looks like and feels like. Design is how it works.
+Steve Jobs
