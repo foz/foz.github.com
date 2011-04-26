@@ -335,3 +335,6 @@ If you want to know if the server is running, you can check for:
 
 	ENV['RACK_ENV'].present?
 	
+# Bundler
+
+$ bundle config build.mysql --with-mysql-config=/usr/local/mysql/bin/mysql_config

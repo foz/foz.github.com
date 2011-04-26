@@ -11,18 +11,19 @@
    <!-- Homepage CSS -->
    <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
 
-   <!-- Typekit -->
-   <script type="text/javascript" src="http://use.typekit.com/osn6jev.js"></script>
-   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	 <!-- google fonts -->
+	 <link href='http://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+	 <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 </head>
-<body>
+<body class="{{page.category}}">
 <div id="container" class="shadow">
-	<div id="top"><a href="/">Foz Notes</a></div>
+	<div id="top"><a href="/"><div class="logo">Fozworks</div><div class="title">Notes</div></a></div>
 	<div id="content">
     	{{ content }}
   	</div>
 	<div id="footer">
-    <p>"foz" is <a href="http://somebox.com/about/jeremy">jeremy zoller seitz</a> who works as <a href="http://somebox.com">somebox</a> and sometimes blogs at <a href="http://fozworks.com">fozworks</a><br/></p>
+    <p class="about">"foz" is <a href="http://somebox.com/jeremy">jeremy zoller seitz</a> who works as <a href="http://somebox.com">somebox</a> and sometimes blogs at <a href="http://fozworks.com">fozworks</a><br/></p>
+		<p class="date">Generated {{site.time}}</p>
 	</div>
 </div>
 </body>
