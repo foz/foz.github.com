@@ -29,7 +29,7 @@ Some of my favorite jQuery plugins:
 
 Calling `console.log` works great for debugging with Firebug or the Safari Developer Tools, but in production, it can kill IE and other browsers with a javascript error. It's all too easy to forget to remove those log messages before deploying an update. So I've started using a global debug function instead:
 
-{% highlight js %}
+```js
 function debug(){
 	if (typeof console != "undefined"){
 		if (console.log){
@@ -41,18 +41,18 @@ function debug(){
 		}
 	}
 }
-{% endhighlight %}
+```
 
 You can pass any number of arguments to `debug()` and they will print nicely. In production the code won't blow up.
 
 ## A Generalized Class (a.k.a. "Module Reveal Pattern")
 
-{% highlight js %}
+```js
 var myClass = function(opts){
 	var options = opts;
 
 	var inspect = function(){
-		debug('A person named '+options.name+' is '+options.age+' years old.');
+		console.log('A person named '+options.name+' is '+options.age+' years old.');
 	}
 
 	return {
@@ -61,13 +61,13 @@ var myClass = function(opts){
 		name: function(){ return options.name; }
 	};
 };
-{% endhighlight %}
+```
 
 Using this class would work like this:
-{% highlight js %}
+```js
 var c = new myClass({name: "Joe", age: 26});
 var str = c.inspect();   // "A person named Joe is 26 years old."
-{% endhighlight %}
+```
 
 # Javascript weirdness
 
