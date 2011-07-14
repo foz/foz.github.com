@@ -205,7 +205,7 @@ Passenger will install nginx automatically (choose option 1, download, compile, 
 
 Create an nginx startup script in /etc/init.d/nginx :
 
-```bash
+{% highlight bash %}
 #!/bin/bash
 #
 # Nginx init script
@@ -250,7 +250,7 @@ case "$1" in
 esac
 
 exit 0
-```
+{% endhighlight %}
 	
 And make it executable:
 
@@ -335,7 +335,7 @@ Make a database.yml file in `shared/config/database.yml`, which should get copie
 
 Create an nginx config files and check into your git repo (in `config/server/nginx.conf` for example). Here's a sample:
 
-```nginx
+{% highlight nginx %}
 	server {
 		listen		1.2.3.4:80;
 		server_name www.myapp.com;
@@ -367,11 +367,11 @@ Create an nginx config files and check into your git repo (in `config/server/ngi
 		server_name 	myapp.com;
 		rewrite ^(.*) 	http://www.myapp.com/;
 	}
-```
+{% endhighlight %}
 
 Edit `/opt/nginx/conf/nginx.conf` to adjust some things:
 
-```nginx
+{% highlight nginx %}
 	worker_processes  4;
 	error_log  logs/error.log;
 	
@@ -392,13 +392,13 @@ Edit `/opt/nginx/conf/nginx.conf` to adjust some things:
 	server {
 		server_name: mybox.company.com; # this is your default site
 	}
-```
+{% endhighlight %}
 
 At the end of the `nginx.conf` file, be sure to include you rails app config(s):
 
-```nginx
+{% highlight nginx %}
 	include '/sites/myapp.com/shared/config/nginx.conf';	
-```
+{% endhighlight %}
 
 # Deploy! 
 

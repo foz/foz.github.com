@@ -29,7 +29,7 @@ Some of my favorite jQuery plugins:
 
 Calling `console.log` works great for debugging with Firebug or the Safari Developer Tools, but in production, it can kill IE and other browsers with a javascript error. It's all too easy to forget to remove those log messages before deploying an update. So I've started using a global debug function instead:
 
-```js
+{% highlight js %}
 function debug(){
 	if (typeof console != "undefined"){
 		if (console.log){
@@ -41,13 +41,13 @@ function debug(){
 		}
 	}
 }
-```
+{% endhighlight %}
 
 You can pass any number of arguments to `debug()` and they will print nicely. In production the code won't blow up.
 
 ## A Generalized Class (a.k.a. "Module Reveal Pattern")
 
-```js
+{% highlight js %}
 var myClass = function(opts){
 	var options = opts;
 
@@ -61,13 +61,13 @@ var myClass = function(opts){
 		name: function(){ return options.name; }
 	};
 };
-```
+{% endhighlight %}
 
 Using this class would work like this:
-```js
+{% highlight js %}
 var c = new myClass({name: "Joe", age: 26});
 var str = c.inspect();   // "A person named Joe is 26 years old."
-```
+{% endhighlight %}
 
 ## Javascript weirdness
 
@@ -109,7 +109,7 @@ Equality (==) can be misleading. It doesn't work the same way as in languages, i
 
 Sometimes its simpler to extract values with a regexp as the first part of an assignment:
 
-```js
+{% highlight js %}
 	var url = /(\d+)\/?$/.exec($('#flickr_url').val());
-```
+{% endhighlight %}
 	
