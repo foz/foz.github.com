@@ -69,7 +69,7 @@ var c = new myClass({name: "Joe", age: 26});
 var str = c.inspect();   // "A person named Joe is 26 years old."
 ```
 
-# Javascript weirdness
+## Javascript weirdness
 
 Null is weird:
 
@@ -105,7 +105,7 @@ Equality (==) can be misleading. It doesn't work the same way as in languages, i
 	>> 1 === true
 	false
 
-# Using regular expressions
+## Using regular expressions
 
 Sometimes its simpler to extract values with a regexp as the first part of an assignment:
 
