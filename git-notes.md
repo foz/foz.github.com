@@ -6,25 +6,30 @@ layout: default
 
 # GIT
 
+Git is a powerful source-control system that lets you manage your projects, have a backup and history on hand at all times, and share and collaborate with others. Git is not just about [Github](http://github.com), you can use it locally or privately to track your own code, documents, or anything really.
+
 ## Essentials
 
-Working with an existing repo
+Working with an existing repo:
 
-	git clone git://url	# checkout a copy
+    git clone git://url	# checkout a copy
 	git branch -a			# lists branches	
 	git checkout origin/branch_name # checkout specific branch
 	git diff				# show local changes
 	git log					# list recent changes
 
-To automatically assume a branch for 'git push' and 'git pull':	
+Add changes/new file(s), commit, then push:
 
-	# edit .git/config:
+    git add .
+    git commit -am 'my log message'
+    git push
 
-	[branch "master"]
-	remote = origin
-	merge = refs/heads/master
+after you add a files, you can do a diff of staging area vs HEAD, before you commit:
 
-## tips
+	$ git diff --cached
+
+
+## Dealing with problems
 
 to fix the previous log message (any you didnt push yet)
 	
@@ -46,7 +51,28 @@ or just reset everything back to the last commit:
 
 	$ git reset --hard
 
-do garbage collection (for when you've been tracking big files)
+or in a really messed up situation, with lots of untracked files or changes, you may need to:
+
+    $ git clean -f -d
+
+to get rid of a bunch of changes
+
+	$ git stash
+	$ git stash drop
+
+after a rejected push, do:
+
+	$ git remote update && git rebase origin/master
+
+## Tips
+
+To automatically choose a remote branch for `git push` and `git pull`, edit `.git/config`:
+
+	[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+
+do garbage collection, save disk space (for when you've been tracking big files):
 
 	$ git gc
 	
@@ -54,10 +80,6 @@ list remotes
 
 	$ git remote -v
 	
-after you add a files, you can do a diff of staging area vs HEAD, before you commit:
-
-	$ git diff --cached
-
 to see the diff of previous commits vs working copy:
 
 	$ git diff @{1}     # <-- last commit
@@ -65,14 +87,4 @@ to see the diff of previous commits vs working copy:
 	$ git diff @{10}    # <-- last 10 commits	
 	
 	$ git diff eb54dc40   # <-- part of the commit SHA 
-	
-to get rid of a bunch of changes
-
-	$ git stash
-	$ git stash drop
-	
-after a rejected push, do:
-
-	$ git remote update && git rebase origin/master
-	
 	
