@@ -5,9 +5,9 @@ layout: default
 ---
 # Debian Rails setup
 
-This rough guide is based on the process taken to set up Rails hosting at Linode several times. The basic setup is always using:
+This rough guide is based on the process taken to set up Rails hosting at Linode several times. The basic setup:
 
-* Linode Debian 5.0 (Lenny) VM
+* Linode Debian 6.0 (Squeeze)
 * Ruby on Rails
 * Passenger/Nginx
 * Ruby Enterprise Edition
@@ -43,39 +43,16 @@ Login to Linode, create server, boot, login as root.
 
 ## Install Base Packages
 
-Edit your Apt sources in `/etc/apt/source.list`
-
-	## main & security repositories
+Check `/etc/apt/source.list` and make sure Debian will use your preferred sources. 
 	
-	deb http://ftp.us.debian.org/debian/ lenny main
-	deb-src http://ftp.us.debian.org/debian/ lenny main
-	deb http://security.debian.org/ lenny/updates main
-	deb-src http://security.debian.org/ lenny/updates main
-
-make sure you have the latest apt keys
-
-	# apt-get install debian-archive-keyring 
-
-install aptitude (it may already be installed)
-
-	# apt-get install aptitude
-	
-Update
+First, update all base packages:
 
 	# aptitude update
-
-Upgrade
-
 	# aptitude dist-upgrade
 
-This selection of packages covers most of the needed utilities and libs needed:
+Now install the rest. This selection of packages will provide everything needed for this guide:
 
-	# aptitude install autoconf build-essential git-core module-assistant subversion \
-		vim vim-scripts dnsutils lsof htop rcconf tofrodos zip unzip openssh-client \
-		openssh-server openssh-blacklist-extra iftop libgcrypt11-dev libmysqlclient15-dev \
-		libpcre3-dev libreadline5-dev libssl-dev mysql-client-5.0 mysql-server-5.0 \
-		locales libcurl4-openssl-dev libmagick++9-dev imagemagick wget sudo rsync \
-		munin munin-node ntp
+	# aptitude install autoconf build-essential git-core module-assistant subversion vim vim-scripts dnsutils lsof htop rcconf tofrodos zip unzip openssh-client openssh-server openssh-blacklist-extra iftop libgcrypt11-dev libmysqlclient15-dev libpcre3-dev libreadline5-dev libssl-dev mysql-client-5.0 mysql-server-5.0 locales libcurl4-openssl-dev libmagick++9-dev imagemagick wget sudo rsync munin munin-node ntp
 
 Note: You will be asked to pick a root password for mysql-server. Write it down!
 
