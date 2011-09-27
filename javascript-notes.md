@@ -12,7 +12,7 @@ layout: default
 
 ## Plugins
 
-Some of my favorite jQuery plugins:
+Some of my very favorite jQuery plugins:
 
 * [facebox](http://chriswanstrath.com/facebox/) - a lightbox plugin that looks and works like the Facebook site does. Has a really nice API and callback/event hooks. From the genius/madness of Chris Wanstrath.
 * [FullCalendar](http://arshaw.com/fullcalendar/) - the mother of all calendar plugins, day/week/month, editing, remote json, timezones, the works.
