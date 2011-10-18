@@ -60,6 +60,11 @@ to get rid of a bunch of changes
     $ git stash
     $ git stash drop
 
+to delete a branch
+
+    $ git branch -d branch-name
+    $ git push origin :branch_to_delete  # @ github!
+
 after a rejected push, do:
 
     $ git remote update && git rebase origin/master
