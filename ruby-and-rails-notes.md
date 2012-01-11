@@ -180,21 +180,42 @@ Finding Code
 Regex Shortcut
 --------------
 
+Given a string `text`:
+
+    text = "file no 1234"
+
 You can use a regex in several ways in Ruby. The "perl-ish" way is with `~=` :
 
 		text =~ /file no (\d+)/
-		found = $1
+		found = $1  # => "1234"
 
 Another way is using `match()`, which returns `MatchData` objects:
 
-		text.match(/file no (\d+)/).matches[0]
+		text.match(/file no (\d+)/).matches[0]  # =>  "1234"
+		
+However, if text could be nil
 
-Perhaps the easiest way to extract matches is using the `[]` method and a regex:
+Still another way to extract matches is using the `[]` method and a regex:
 
-		text.to_s[/(\d+)-(\w+)\s+min/i, 2]  # index 2 returns the (\w+) part.
+		text.to_s[/file no (\d+)/, 1]  # =>  "1234"
 		
 Using `to_s` ensures that if `text` is `nil` you won't get an exception.
 
+But, perhaps the cleanest way is with `scan`:
+
+    test.scan(/file no (\d+)/)  # =>  "1234"
+    
+Also, `scan` works with multiple matches where others do not:
+
+    text = "test here"
+    
+    text.match(/(test|here)/)
+    => #<MatchData "test" 1:"test">  # ONE match
+    
+    text[/(test|here)]  # => ONE match
+    
+    text.scan(/(test|here)/)   # => TWO matches: ["test", "here"]
+    
 Fix Readline, forward-delete and ~ (tilde) problem on OSX Snow Leopard:
 -----------------------------------------------------------------------
 
@@ -246,8 +267,6 @@ Ruby Pitfall
 
 A common Ruby pitfall...
 
-	>> a,b,c = 1,4,2
-	[1, 4, 2]
 	>> i = b > a and b < c
 	false
 	>> i
@@ -338,3 +357,9 @@ If you want to know if the server is running, you can check for:
 # Bundler
 
 $ bundle config build.mysql --with-mysql-config=/usr/local/mysql/bin/mysql_config
+
+# ActionView::MissingTemplate: Missing template
+
+Add this to application.rb to handle errors with "smart" format detection.
+
+  config.action_dispatch.ignore_accept_header = true  
