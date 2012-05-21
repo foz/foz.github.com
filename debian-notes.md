@@ -256,4 +256,9 @@ x = the devic
 
     # dd if=/dev/xvda | gzip --fast -c | ssh user@target-server /bin/dd of=/backup/server_disk.img.gz
     
-    
+### use a variable name dynamically in bash ###
+
+  $ var="what"
+  $ what="cool!"
+  $ echo ${!var}
+  cool!
