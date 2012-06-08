@@ -86,3 +86,7 @@ This BASH script will backup all MySQL databases on the local machine as separat
 <script src="http://gist.github.com/549062.js"> </script>
 
 Also available as a [gist](http://gist.github.com/549062).
+
+## Watching mysqld ##
+
+    $ watch "mysqladmin pr -vv"

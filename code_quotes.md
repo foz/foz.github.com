@@ -4,8 +4,7 @@ layout: default
 
 ---
 
-Funny
------
+# Funny
 
 mlc classic:
 
@@ -22,8 +21,7 @@ From a chat with mlc:
 	1:56:01  mlc@jabber.org: it seems you are interested in vision
 	1:56:08  foz: lol
 	
-Quotes
-------
+# Quotes
 
 "I prefer to make the structure of my programs self-illuminating, eliminating the need for comments. I am not always successful, so while my programs are awaiting perfection, I am writing comments." 
 
@@ -59,3 +57,11 @@ It is not the critic who counts: not the man who points out how the strong man s
 “The fact that some geniuses were laughed at does not imply that all who are laughed at are geniuses. They laughed at Columbus, they laughed at Fulton, they laughed at the Wright brothers. But they also laughed at Bozo the Clown.” 
 
 > -- Carl Sagan.
+
+
+# Other
+
+"The institutional structure of the United States is under stress. We might be in dangerous economic straits if the dollar were not the principal international reserve currency and the eurozone in deep fiscal trouble. We have a huge public debt, dangerously neglected infrastructure, a greatly overextended system of criminal punishment, a seeming inability to come to grips with grave environmental problems such as global warming, a very costly but inadequate educational system, unsound immigration policies, an embarrassing obesity epidemic, an excessively costly health care system, a possible rise in structural unemployment, fiscal crises in state and local governments, a screwed-up tax system, a dysfunctional patent system, and growing economic inequality that may soon create serious social tensions. Our capitalist system needs a lot of work to achieve proper capitalist goals."
+
+> -- U.S. Circuit Judge Richard Posner
+
