@@ -12,11 +12,12 @@ Git is a powerful source-control system that lets you manage your projects, have
 
 Working with an existing repo:
 
-    git clone git://url # checkout a copy
-    git branch -a     # lists branches  
-    git checkout origin/branch_name # checkout specific branch
-    git diff        # show local changes
-    git log         # list recent changes
+    git clone git://url                 # checkout a copy
+    git branch -a                       # lists branches  
+    git checkout origin/branch_name     # checkout specific branch
+    git diff                            # show local changes
+    git status                          # show current situation
+    git log                             # list recent changes
 
 Add changes/new file(s), commit, then push:
 
@@ -28,6 +29,11 @@ after you add a files, you can do a diff of staging area vs HEAD, before you com
 
     $ git diff --cached
 
+
+to delete a branch
+
+    $ git branch -d branch-name               # local branch
+    $ git push origin --delete <branchName>   # @ github!
 
 ## Dealing with problems
 
@@ -59,11 +65,6 @@ to get rid of a bunch of changes
 
     $ git stash
     $ git stash drop
-
-to delete a branch
-
-    $ git branch -d branch-name
-    $ git push origin :branch_to_delete  # @ github!
 
 after a rejected push, do:
 
