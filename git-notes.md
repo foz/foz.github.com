@@ -127,3 +127,10 @@ to see the diff of previous commits vs working copy:
 
     $ git diff eb54dc40   # <-- part of the commit SHA 
 
+Perhaps the easiest way to catch up with what changed is to have git show you the diffs, commit-by-commit:
+
+    $ git log -p
+
+When committing a large change, you may want to separate the commits. By doing a **patch** commit, where git will ask you about each change and you can choose to add, skip or delete them one-by-one:
+
+    $ git commit -p

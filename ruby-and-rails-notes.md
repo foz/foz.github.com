@@ -356,10 +356,17 @@ If you want to know if the server is running, you can check for:
 	
 # Bundler
 
-$ bundle config build.mysql --with-mysql-config=/usr/local/mysql/bin/mysql_config
+	$ bundle config build.mysql --with-mysql-config=/usr/local/mysql/bin/mysql_config
 
 # ActionView::MissingTemplate: Missing template
 
-Add this to application.rb to handle errors with "smart" format detection.
+Add this to `application.rb` to handle errors with "smart" format detection.
 
-  config.action_dispatch.ignore_accept_header = true  
+  	config.action_dispatch.ignore_accept_header = true  
+
+## Array Fun
+
+Reduce:
+
+	>> (1..33).reduce([]){|r,v| r.tap{ r << v if v % 2 == 0} }
+	=> [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
