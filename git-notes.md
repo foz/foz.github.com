@@ -98,6 +98,11 @@ to revert a merge or large commit that was NOT yet pushed:
     
     $ git st
     # ... (clean!)...
+
+To totally revert a branch
+
+    $ git branch -D master
+    $ git checkout master
     
 ## Tips
 
