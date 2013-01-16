@@ -106,6 +106,10 @@ To automatically choose a remote branch for `git push` and `git pull`, edit `.gi
     remote = origin
     merge = refs/heads/master
 
+When you first push a branch, enable tracking with:
+
+    $ git push -u origin master
+
 To do a rebase by default with `git pull`, add this to the branch in `.git/config`:
 
     [branch "master"]
@@ -134,3 +138,8 @@ Perhaps the easiest way to catch up with what changed is to have git show you th
 When committing a large change, you may want to separate the commits. By doing a **patch** commit, where git will ask you about each change and you can choose to add, skip or delete them one-by-one:
 
     $ git commit -p
+
+By default, when you do a `git push`, it pushes all branches. You can disable this with:
+
+    $ git config --global push.default tracking 
+

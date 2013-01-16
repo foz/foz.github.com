@@ -262,3 +262,9 @@ x = the devic
   $ what="cool!"
   $ echo ${!var}
   cool!
+
+### Install debian kernel headers ###
+
+    # aptitude install linux-headers-$(uname -r)
+
+ 
