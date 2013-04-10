@@ -8,11 +8,12 @@ layout: default
 
 ## Good Tools
 
-[Firebug](http://getfirebug.com/) makes js development much easier. [FireQuery](http://firequery.binaryage.com/) makes jQuery development rock.
+[Firebug](http://getfirebug.com/) and [FireQuery](http://firequery.binaryage.com/) are great for jQuery development. You can see events attached to the DOM, along with data values.
 
 ## Plugins
 
 Some of my very favorite jQuery plugins:
+_(note: some of these are quite old)_
 
 * [facebox](http://chriswanstrath.com/facebox/) - a lightbox plugin that looks and works like the Facebook site does. Has a really nice API and callback/event hooks. From the genius/madness of Chris Wanstrath.
 * [FullCalendar](http://arshaw.com/fullcalendar/) - the mother of all calendar plugins, day/week/month, editing, remote json, timezones, the works.
@@ -31,15 +32,15 @@ Calling `console.log` works great for debugging with Firebug or the Safari Devel
 
 {% highlight js %}
 function debug(){
-	if (typeof console != "undefined"){
-		if (console.log){
-			if (arguments.length == 1){
-				console.log(arguments[0]);
-			} else {
-				console.log(arguments);
-			}
-		}
-	}
+  if (typeof console != "undefined"){
+    if (console.log){
+      if (arguments.length == 1){
+        console.log(arguments[0]);
+      } else {
+        console.log(arguments);
+      }
+    }
+  }
 }
 {% endhighlight %}
 
@@ -47,78 +48,97 @@ You can pass any number of arguments to `debug()` and they will print nicely. In
 
 ## A Generalized Class (a.k.a. "Module Reveal Pattern")
 
+The [module pattern](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript) is clean and simple. It works well when you need a place to put related functions and data together in a namespace.
+
+The [module reveal pattern](http://addyosmani.com/resources/essentialjsdesignpatterns/book/#revealingmodulepatternjavascript) is a little different, but lets you have private functions. This might be a good choice for building larger interfaces. It also has some drawbacks (see linked article above).
+
 {% highlight js %}
-var myClass = function(opts){
-	var options = opts;
+var AgeReporter = function(opts){
+  var options = opts;
 
-	var inspect = function(){
-		console.log('A person named '+options.name+' is '+options.age+' years old.');
-	}
+  var publicSummary = function(){
+    console.log('A person named '+options.name+' is '+options.age+' years old.');
+  }
 
-	return {
-		inspect: inspect,
-		test: function(){ alert('test'); },
-		name: function(){ return options.name; }
-	};
+  return {
+    summary: publicSummary,
+    test: function(){ alert('test'); },
+    name: function(){ return options.name; }
+  };
 };
 {% endhighlight %}
 
 Using this class would work like this:
 {% highlight js %}
-var c = new myClass({name: "Joe", age: 26});
-var str = c.inspect();   // "A person named Joe is 26 years old."
+var ar = new AgeReporter({name: "Joe", age: 26});
+var str = ar.summary();     // "A person named Joe is 26 years old."
 {% endhighlight %}
+
 
 ## Javascript weirdness
 
 Null is weird:
 
-	>> null >= 0
-	true
-	>> null > 0
-	false
-	>> null <= 0
-	true
-	>> null < 0
-	false
-	>> null >= -1
-	true
-	>> null >= 1
-	false
-	>> null == 0
-	false
-	>> null == false
-	false
-	
-Equality (==) can be misleading. It doesn't work the same way as in languages, it does type conversions before the compare. You must use === to be certain:
+    >> null >= 0
+    true
 
-	>> "123" == 123  
-	true
-	>> 1 == true
-	true
-	>> 2 == true
-	false
-	>> 0 == true
-	true
-	>> "123" === 123
-	false
-	>> 1 === true
-	false
+    >> null > 0
+    false
+
+    >> null <= 0
+    true
+
+    >> null < 0
+    false
+
+    >> null >= -1
+    true
+
+    >> null >= 1
+    false
+
+    >> null == 0
+    false
+
+    >> null == false
+    false
+
+Equality (`==`) can be misleading. It doesn't work the same way as in languages, it does type conversions before the compare. You must use `===` to be certain:
+
+    >> "123" == 123  
+    true
+
+    >> 1 == true
+    true
+
+    >> 2 == true
+    false
+
+    >> 0 == true
+    true
+
+    >> "123" === 123
+    false
+
+    >> 1 === true
+    false
 
 ## Checkboxes and jQuery
 
 The `checked` attribute in a checkbox field is only used for the **initial** value. 
-	
-	$(elem).attr("checked")  	// WRONG, only reports the initial state
-	$(elem).is(":checked")		// CORRECT, shows current state
-	$(elem).prop("checked")		// Better, jQuery 1.6
+
+{% highlight js %}
+$(elem).attr("checked")   // WRONG, only reports the initial state
+$(elem).is(":checked")    // CORRECT, shows current state
+$(elem).prop("checked")   // Better, jQuery 1.6
+{% endhighlight %}
 
 ## Using regular expressions
 
 Sometimes its simpler to extract values with a regexp as the first part of an assignment:
 
 {% highlight js %}
-	var num = /id=(\d+)\/?$/.exec($('input.url').val());
-	var url = /(\d+)\/?$/.exec($('#flickr_url').val());
+var num = /id=(\d+)\/?$/.exec($('input.url').val());
+var url = /(\d+)\/?$/.exec($('#flickr_url').val());
 {% endhighlight %}
-	
+  
