@@ -6,12 +6,12 @@ layout: default
 
 # NYC Guide
 
-This is a collection of favorite places and stuff to do in NYC.
+This is a collection of favorite places and stuff to do in NYC. I lived in NYC for about 11 years before moving to europe in 2006, although I return frequently to visit friends and family. I often get asked by europeans "what to do in NYC?". So I've compiled some of my favorite places to go.
 
----
 
 ## Lower East Side
 
+---
 
 ### [Katz' Deli](https://plus.google.com/106603537575677448372/about)
 [205 E Houston St](https://goo.gl/maps/M3TeY)
@@ -57,6 +57,8 @@ Great fresh pizza. Try the little meatballs, or pizza with lots of salad on it.
 
 ## West Village
 
+---
+
 ### [Village Vanguard]()
 
 
@@ -75,6 +77,8 @@ Classic NY Pizza, thin and tasty.
 
 ## Soho
 
+---
+
 ### [Pepe Rosso to Go](https://plus.google.com/104692046265113757947/about?hl=en)
 
 [149 Sullivan St.]()
@@ -83,11 +87,39 @@ Classic NY Pizza, thin and tasty.
 
 Great Italian food to go. Perfect for a lazy dinner or lunch in the park.
 
-## Midtown
+### [Apple Store Soho](https://plus.google.com/105749664905800133296/about?hl=en)
 
-[B&H Photo Video](https://goo.gl/maps/Yefka)
+[103 Prince St.](https://goo.gl/maps/4izla)
+
+Small and very busy. One of the original stores.
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d3023.6785167850276!2d-73.9991716!3d40.725093099999995!3m2!1i1024!2i768!4f13.1!3m2!1m1!1s0x0%3A0x82a5771324cf7f25!5e0!3m2!1sen!2sch!4v1386543197877" width="500" height="250" frameborder="0" style="border:0"> </iframe>
+
+### [Camper Shoes](https://plus.google.com/110316604952879613263/about?hl=en)
+
+[125 Prince St.](https://goo.gl/maps/1rPC2)
+
+Great shoes.
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.6521145076053!2d-73.999882689904!3d40.72567423117516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x73d5ee883c975172!2sCamper!5e0!3m2!1sen!2sch!4v1386543395110" width="500" height="250" frameborder="0" style="border:0"> </iframe>
+
+
+## Elsewhere
+
+---
+
+[B&H Photo Video](https://plus.google.com/112292511424425708032/about?hl=en)
+
+[9th Ave & 34th St](https://goo.gl/maps/Yefka)
 
 The best place for camera and audio gear. Amazing prices and selection. Nice used offerings as well. Huge place.
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x89c26752020269fd%3A0xb2cad387143e6b48!2sB%26H+Photo+Video%2C+9th+Avenue%2C+New+York%2C+NY!5e0!3m2!1sen!2s!4v1386539460307" width="500" height="250" frameborder="0" style="border:0"> </iframe>
 
+[J&R Music Store](https://plus.google.com/116547562565388608173/about?hl=en)
+
+[1 Park Row, Lower Manhattan](https://goo.gl/maps/onYMO)
+
+Incredible selection of computer, camera, and music stuff. Good prices, huge place.
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d756.0725699487286!2d-74.00697763061999!3d40.71162588321769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a18802658f7%3A0x1c99073c050265a4!2sJ%26R+Music+%26+Computer+World%2C+Park+Row%2C+New+York%2C+NY%2C+United+States!5e0!3m2!1sen!2sch!4v1386543588114" width="500" height="250" frameborder="0" style="border:0"> </iframe>
