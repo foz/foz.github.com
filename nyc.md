@@ -108,7 +108,7 @@ Great shoes.
 
 ---
 
-[B&H Photo Video](https://plus.google.com/112292511424425708032/about?hl=en)
+### [B&H Photo Video](https://plus.google.com/112292511424425708032/about?hl=en)
 
 [9th Ave & 34th St](https://goo.gl/maps/Yefka)
 
@@ -116,10 +116,18 @@ The best place for camera and audio gear. Amazing prices and selection. Nice use
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x89c26752020269fd%3A0xb2cad387143e6b48!2sB%26H+Photo+Video%2C+9th+Avenue%2C+New+York%2C+NY!5e0!3m2!1sen!2s!4v1386539460307" width="500" height="250" frameborder="0" style="border:0"> </iframe>
 
-[J&R Music Store](https://plus.google.com/116547562565388608173/about?hl=en)
+### [J&R Music Store](https://plus.google.com/116547562565388608173/about?hl=en)
 
 [1 Park Row, Lower Manhattan](https://goo.gl/maps/onYMO)
 
 Incredible selection of computer, camera, and music stuff. Good prices, huge place.
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d756.0725699487286!2d-74.00697763061999!3d40.71162588321769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a18802658f7%3A0x1c99073c050265a4!2sJ%26R+Music+%26+Computer+World%2C+Park+Row%2C+New+York%2C+NY%2C+United+States!5e0!3m2!1sen!2sch!4v1386543588114" width="500" height="250" frameborder="0" style="border:0"> </iframe>
+
+### [Bryant Park](https://plus.google.com/108710101517561857412/about?hl=en)
+
+[42nd st and 5th ave](https://goo.gl/maps/QjusL)
+
+Great atmosphere, lots of good events happen in the summer here. Chess, chairs, fountains, trees. Busy city all around.
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x89c259aae7a0b1bd%3A0xb49cafb82537f1a7!2sBryant+Park%2C+West+40th+Street%2C+New+York%2C+NY%2C+United+States!5e0!3m2!1sen!2sch!4v1386544101771" width="600" height="450" frameborder="0" style="border:0"> </iframe>
