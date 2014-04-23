@@ -34,13 +34,12 @@ Really nice variety of tasty fresh sandwiches and great salads. Cozy atmosphhere
 
 [21 Clinton Street](https://goo.gl/maps/EJ84A)
 
-Great place to hang out, code or meet freelancers. Good power and WIFI.
+Great place to hang out, code or meet freelancers. Good power and WIFI. They also have nice chocolate desserts, and red wine, which makes for a nice evening spot.
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m5!3m3!1m2!1s0x89c25981f56ef7ed%3A0xd5465f915be672b5!2sCocoa+Bar!5e0!3m2!1sen!2sch!4v1386534724036" width="500" height="250" frameborder="0" style="border:0"> </iframe>
 
 
 ### [Local 138](https://plus.google.com/103856895779446559201/about)
-
 
 [138 Luldow Street](https://goo.gl/maps/pRh6v)
 
@@ -102,6 +101,11 @@ Small and very busy. One of the original stores.
 Great shoes.
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.6521145076053!2d-73.999882689904!3d40.72567423117516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x73d5ee883c975172!2sCamper!5e0!3m2!1sen!2sch!4v1386543395110" width="500" height="250" frameborder="0" style="border:0"> </iframe>
+
+[Brooklyn Industries](https://plus.google.com/113690270068962010335/about?hl=en)
+
+Nice hoodies, t-shirts, and generally cool clothes that are well-made.
+
 
 
 ## Elsewhere
