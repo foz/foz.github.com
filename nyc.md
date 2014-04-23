@@ -74,6 +74,14 @@ Classic NY Pizza, thin and tasty.
 
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.37670498665!2d-74.00342008173712!3d40.73173576444189!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x41ca6e3a2f6d4e74!2sJohn&#39;s+of+Bleecker+Street!5e0!3m2!1sen!2s!4v1386534470915" width="500" height="250" frameborder="0" style="border:0"> </iframe>
 
+### [Umami Burger](https://plus.google.com/117477754935895442496/about?hl=en)
+
+Amazing burgers, made with incredible care and attention to detail. The super-thin fries are also awesome.
+
+[432 6th Ave.](https://www.google.ch/maps/place/Umami+Burger/@40.73441,-73.998608,17z/data=!3m1!4b1!4m2!3m1!1s0x0:0x78ccdcd4265f61e?hl=en)
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.236788980006!2d-73.99939120741635!3d40.73481491349735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25996f2749603%3A0x78ccdcd4265f61e!2sUmami+Burger!5e0!3m2!1sen!2s!4v1398234230662" width="500" height="250" frameborder="0" style="border:0"></iframe>
+
 ## Soho
 
 ---
@@ -103,6 +111,8 @@ Great shoes.
 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.6521145076053!2d-73.999882689904!3d40.72567423117516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x73d5ee883c975172!2sCamper!5e0!3m2!1sen!2sch!4v1386543395110" width="500" height="250" frameborder="0" style="border:0"> </iframe>
 
 ### [Brooklyn Industries](https://plus.google.com/113690270068962010335/about?hl=en)
+
+801 Broadway
 
 Nice hoodies, t-shirts, and generally cool clothes that are well-made.
 
