@@ -258,7 +258,13 @@ x = the devic
     
 ### use a variable name dynamically in bash ###
 
-  $ var="what"
-  $ what="cool!"
-  $ echo ${!var}
-  cool!
+		$ var="what"
+		$ what="cool!"
+		$ echo ${!var}
+		cool!
+
+### List files by atime
+
+You might want to see when files were **accessed** rather than modified:
+
+		$ ls -lu
