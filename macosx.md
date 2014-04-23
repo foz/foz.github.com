@@ -121,8 +121,7 @@ To see what processes are using the disk:
 
     $ sudo fs_usage -f filesys
 
-Snow Leopard, Ruby and MySQL
-----------------------------
+# Snow Leopard, Ruby and MySQL
 
 I was finally able to get the mysql 2.8.1 gem after a snow leopard upgrade. After trying many different builds, 64 vs. 32, etc, I ended up:
 
@@ -164,4 +163,6 @@ This will open an ssh session, and the correct VNC ports are opened on your loca
  	vnc://localhost:1202
 
 
+# Identify system CPU
 
+  $ sysctl -n machdep.cpu.brand_string

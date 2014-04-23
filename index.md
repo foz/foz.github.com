@@ -33,6 +33,7 @@ category: home
 ## Other Stuff
 
 * [Favorite Quotes and Funny Stuff](code_quotes.html)
+* [Stuff to do in NYC](nyc.html)
 
 ---
 

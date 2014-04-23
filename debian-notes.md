@@ -268,3 +268,9 @@ x = the devic
 You might want to see when files were **accessed** rather than modified:
 
 		$ ls -lu
+
+### Install debian kernel headers ###
+
+    # aptitude install linux-headers-$(uname -r)
+
+ 
